@@ -293,25 +293,9 @@ that tables do not?
 Data model - the structure of the database.  If you have three tables and
 each table has ten fields, that is your record.
 
-You don't have to know the model in a NOSQL.
+--
+What are Promises and how do they work?
 
-
-To search a NOSQL table, you have to search the whole table.  
-
-
-+ What bad thing happens if a table field is blank that doesn't happen with
-the NOSQL model?
-
-
-Nothing, as long as you insert a blank value.  If you don't insert blank
-values.  Black Box - bad things happen if you don't insert blank values.
-
-
-+Why does the object model use more disk space than the Relational Database
-model?
-
-
-
-
+--
 
 What exactly is a DOM?-
