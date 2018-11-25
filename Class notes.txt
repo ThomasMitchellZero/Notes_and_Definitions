@@ -1,0 +1,317 @@
+--what does JSON mean? JSON stands for Javascript Object Notation, and it's just a 
+    format for calling out the key:value pairs of an object (much like what the CSV format is to tables)
+
+    name {
+    key1: "value1",
+    key2: "value2"
+    }
+
+--What is V8 and what does it do?  
+    V8 is a C++ program that takes Javascript code and translates it into machine code.
+
+--what is Node.js?  
+    Node.JS is a C++ program that incorporates V8 and its JS > machine code functionality.  However, it also
+    allows you to perform a lot of additional actions that JS does not contain.  For instance, you can just
+    type Require into your JS code like it's a built-in method and JS will process it without trouble.
+
+--What is nodemon?   It is a program for node that constantly checks
+the source for any changes and then restarts the server automatically.
+Using it feels liek any changes you make to the source code are
+reflected in the app in real time.  If I add an <h1> to an HTML page,
+it appears almost instantly with no need for me to manually restart.
+
+This should be installed as a dev dependency by using the -D suffix
+to the NPM CLI install (i.e npm -D nodemon)
+
+
+
+AFAICT, when starting a new Node application we need to run   npm init from
+the CLI.  It definitely creates the package.json file for me.  Not sure
+if it does anything else.
+
+--What is an object? 
+    An object is just a set of name-value pairs.  The values can be 
+    primitives, or they can be other objects, like methods. In JS
+    objects are the contents of curly braces {}
+
+What is a method? 
+    a method is just a named function that is part of an object.
+    Remember that objects are just collections of key:value pairs,
+    so 
+
+What is a primitive? - A primitive is a value with no other features.  Things like strings, numbers, 
+    and booleans are primitives.  Objects and methods are not.  It might just be anything that doesn't
+    contain an operator?
+
+module.exports =   
+     so I just now understood the form of this.  Module is an object.  Exports is a property 
+    of that object, specifically a property that makes the value it contains available to the Require method.
+    Require takes a parameter (the file path) and returns whatever value has been assigned to 
+    the Exports key of the Module object in the JS file it finds there.
+
+Event Listener:
+    A name for code that runs in response to the occurance of a particular
+    event.  I believe they take the event as one parameter?
+
+Object Literal: An object you make and populate by hand.  For instance,
+
+var cats = {
+    cat1: bubu,
+    cat2: Sorin,
+};
+
+object constructor = a function that is a template for a new object. When
+you call the function in the future, the parameters you pass it will be
+assigned to their appropriate keys and values.  This is used if you expect
+to make a lot of objects with the same set of properties.
+
+For instance:
+
+function cats(name, age, color){
+    this.name = name;
+    this.age = age;
+    this.color = color;
+}
+
+
+
+
+--
+
+const versus var
+
+const means that the variable can't be reassigned.  This acutally 
+seems like what I want in most cases, like if I'm requiring an
+outside module.  Plus, once it's assigned you just call the name
+the same way you would if it were a var.
+
+--
+
+
+.prototype method = Normally, you can't make changes to an object constructor
+function on the fly. If you want another property, you have to add it into
+the constructor function before the code is run.  The .prototype method
+allows you to bend that rule.
+
+Something else interesting about prototypes.  If I use the .prototype method to
+change an object, such as:  
+
+Walk.prototype.speed = "fast";
+
+All of Walk's child objects will get the property of .speed and the value of
+"fast" but Walk itself remains unchanged (I think.)
+
+9.22.8:47pm
+
+Here's my best explanation right now.  Children don't automatically inherit ANYTHING
+from their parents.  Only members specified with the .prototype function
+are passed on.  
+
+--
+
+Template literal - a way to concatenate strings in Javascript.  (more needed)
+This is a new feature in ES6.  Basically, you use back ticks `` instead of 
+'' quotes to enclose a statement and wrap variables in ${} and then you don't
+have to do a bunch of plus signs.  Not sure this is better, but here's an example:
+
+var name = "John Doe";
+var greet2 = `I shot ${name}`;
+
+--
+
+A name-value pair in an object is called a 'member'
+
+--
+
+Instantiation is when you create an object instance from a class.
+
+--
+
+libuv is a library within Node.JS.  It deals with events coming from
+lower levels in the machine, like opening a file.
+
+Lib UV runs something called the Event Loop, in which it is constantly
+checking for events from the operating system.  When an event is
+detected, it is placed into a queue, and this usually happens when the
+event completes.
+
+When the event is complete, libuv runs a callback function.  That function
+usually results in Javascript code running in response.
+
+--
+
+An abstract class (also called a base class) is a type of object you 
+never work directly with.  You can only inherit from it.
+
+--
+
+Chaining is when a method returns an object that can have another method
+called on it right then.  In many cases, the method returns the parent object
+which is technically called cascading.  
+
+looks like object.method1().method2().method3();
+
+--
+
+An API is a set of URLs that accept and send data.  Sounds like in the
+API model, all of the data-processing is done off-world on the URL host
+server.  So a site might an input phrase and give me back the same phrase
+in Spanish, but I would have no access to the process by which they did it.
+
+APIs are usually a series of URLs, one for each function.  An individual
+URL within an API is called an 'endpoint'.  
+
+APIs give and receive data in multiple formats, and the most popular is
+JSON.
+
+--
+
+Serialization - means to convert a JS object into a format that can be
+transferred.  JSON and CSV are two examples.  'Deserialization' is the
+inverse; it translates the formatted data back into a JS object.
+
+--
+
+GitHub repositories:
+
+Here's an example of the code you run to get link to an online respository
+
+git remote add origin https://github.com/ThomasMitchellZero/Gitty-The-First.git
+git push -u origin master.
+
+--HTTP Request
+
+This is a text file generated by the browser that goes to the server
+and lets the server know what to send back.  More to come, but it has
+a head and a body.
+
+--
+
+HTTP Method:  HTTP is not HTML.  HTTP methods specify the "type" of
+request coming from the client (the browser) to the server.  Not to be
+confused with a "response" which is when the server talks back to
+the client.  
+
+HTTP methods are also called HTTP verbs, and they are things like
+GET, POST, DELETE, etc.  The verbs come along with the rest of 
+the HTTP request, and the server treats requests differently based on
+what type of verb it receives.
+
+For instance, a GET request is asking the server to just send some
+information (like an HTML file) while a POST request is telling the
+server to incorporate some information coming from the client, like 
+the contents of a form.  
+
+One other interesting detail: GET and POST requests can both have queries,
+but in a GET the query string is in the head, while in a POST it is in
+the body of the req.  Not sure if this is a universal.
+
+POST reqs can also contain JSON objects in the body, not just strings.  
+The Content-Type section of the req header is where you specify what
+the body of the POST will contain.
+
+--
+
+Middleware is software that intermediates between two layers of
+software.   AFAICT, in the case of a Node server, the first layer
+is the browser generating the request, the second layer is
+the Node application generating the response, and the middleware is 
+Express?  If I am correct, Express is taking the incoming stream from
+the broswer, changing it, and then passing on that changed version to
+the application running in Node.
+
+
+--
+
+Express:  Not sure exactly what Express is, but it is a framework for
+web apps.  It simplifies routing (what to send as a response to a request
+for a particular URL)  
+
+Also of note: Express has to be installed separately on the top-level
+folder of any new app.
+
+--
+
+Static Files: Files that are not processed by the code in any way.
+AFAICT, this means that the files are not changed.  If the client
+requests the contents of a text file, I don't process that text file.
+I just send it on its way.  
+
+Requests DO NOT automatically connect to files.  I need to specifically
+tell the program what to do when a request for a file comes in.
+
+--
+
+Template Engines: these are utilities for Express that take text and
+translate it into the HTML that will be delivered to the client via
+the server response.  Once you have installed your template engine 
+(EJS in this case) you can create individual web pages as .ejs files
+rather than .html files.  EJS (or whatever template engine you are using)
+will then translate your EJS file into an HTML file before sending it 
+as a response.
+
+--
+
+REST - Stands for REpresentational State Transfer, and it is an 
+architectural style for building APIs.  I don't really get this one
+because I don't know enough about the alternatives, but the gist
+seems to be that you structure your API in such a way that the 
+different HTTP verbs correspond to the function you are performing.
+
+Each request from client to server must contain  all the information
+necessary to understand that request, and can't use any stored context on 
+the server.  
+
+For instance, I think POST does everything that GET does.  Even if a page
+has no interaction whatsoever, you can still render it with POST.  
+But because GET exists to handle non-interactive HTTP requests, you're 
+not being RESTful if you use POST instead. 
+
+Is this bad for any reason other than legibility?  
+
+
+--
+
+///  DATABASES ///
+
+-- Relational databases:  AFAICT, the best way to make a relational database
+is to have EVERYTHING have a unique identifier and a value.  So you have a 
+table of key:name pairs, a table of key: address pairs, and a table of
+key:email pairs.  The actual tables, called Relational Databases,  used are 
+then assembled from links to the relevant keys.  This way, there is only every
+a single source of truth for each value.  Changing an email on the main table
+changes it everywhere.  Data that does not repeat itself unnecessarily is 
+called "well-normalized".
+
+The advantage of doing it this way is that you don't need an entry for every
+key-value pair.  If there's no entry for person.height, you just get back
+"Undefined".  (but is this really a problem with tables?) 
+
++ How do objects allow you to change data structures on the fly in a way
+that tables do not?  
+
+Data model - the structure of the database.  If you have three tables and
+each table has ten fields, that is your record.
+
+You don't have to know the model in a NOSQL.
+
+
+To search a NOSQL table, you have to search the whole table.  
+
+
++ What bad thing happens if a table field is blank that doesn't happen with
+the NOSQL model?
+
+
+Nothing, as long as you insert a blank value.  If you don't insert blank
+values.  Black Box - bad things happen if you don't insert blank values.
+
+
++Why does the object model use more disk space than the Relational Database
+model?
+
+
+
+
+
+What exactly is a DOM?-

@@ -1,0 +1,139 @@
+GitHub
+
+--
+Github file hierarchy.
+
+Save:  For the most part, this is not a state change Github
+cares about, like how 'girlfriend' has no meaning to the law.
+AFAICT the only thing this gets you is the ability to stage
+changes.  Until you save you can't even do that.
+
+Stage:  It's like a draft of a proposed change.  It's a step
+above a save in that Git now recognizes it and you can now
+make comparisons between it and the previous commit.  Also,
+just had another thought.  I don't think you can commit an
+individual file.  I think staging individual files is the 
+best you can do.  I also don't think you can commit a sub-folder.
+
+Commit:  You're making a separate, stand-alone instance of the
+whole program.  Even if you only changed one file, if you are
+committing you are saving the whole megillah.  
+
+
+
+
+
+
+
+--
+
+OK, a few things I don't understand.
+
+I have a GitHub account.  I have Github on my desktop.  Why can't I see 
+my files on both?
+
+So, let's start from zero.  These notes are in a new folder on the desktop
+called GitHub Class.  When I opened the folder in VS Code and went to the
+Source Control tab, there was a button at the top to initialize the 
+repository.  I did that.  Now the button is gone, so I assume this only
+ever has to be done once.  
+
+Repository = a folder that has been initialized with Git?
+
+Something else interesting.  Changes do not cause the SCM change to show the
+'1 pending changes' bubble.  But saving the changes do cause this.
+
+Also of note:  Until a file has been saved, it does not show up in the 
+SCM panel as being changed.  But I can click on the name of the file
+under the Changes header in the SCM panel and it will pop up a window
+beside my working window of how the file was different at the most
+recent commit so I can compare the two.  
+
+What about staging changes?  What exactly is the purpose of this?  What
+does this do that just saving the file does not?
+
+
+But right now, it's not online on my Github account.  This vexes me.
+
+'Local repositories' are a thing.  That just means that it is a repository
+that is specific to one computer.  I assume this is why I can't see my NodeJS
+files on Github - my NodeJS class folder is probably a local repository.
+
+This is confusing.  The repository seems to be a folder inside the main
+folder?
+
+--
+
+I think the following is how you create a link to an online repository.
+
+So my dir in the CLI is Thomas@LAPTOP-7BM4E57R MINGW64 ~/Desktop/devconnector
+That is where my files for the DevConnector project are, and
+where the .git folder is as well.
+
+Then, to that dir in the CLI, I paste these two commands:
+
+git remote add origin https://github.com/ThomasMitchellZero/DevConnector_Project.git
+git push -u origin master
+
+It seems to have worked.  Now, all the files that were on my
+local repository are now on the online repository.  So far, this
+is working as expected.  I don't remember why this wasn't
+working the other night.  
+
+
+I think I figured a few things out.  Here's the pattern.
+First, open the top-level folder you are working in with VS Code.  It's
+an option if you right-click the folder in Windows Explorer.  This
+is important because it is possible to have multiple folders from 
+different file trees in the same VSC instance.  It's called an Untitled
+Workspace by default, and I don't think it's possible to turn that
+into a repository.  What's it going to do, package your whole desktop?
+
+Once you have it open in VSC and you're in the SCM tag, you've got
+the option at the top right of the sidebar to 'Initialize Repository'
+and here is where I think I was going wrong.  What you see when you do
+is:
+
+FOLDERNAME c:\folder\path\xxxxx
+Choose Folder...
+
+It's not asking you to choose a folder inside the path that's showing - 
+it's asking you to CHOOSE BETWEEN the two of them.  That's why I kept
+messing up.  I was choosing the second option, creating a new folder
+inside my main folder with a new name and no contents, and then
+wondering what the fuck was not working.  
+
+When I instead chose the existing path from the dropdown, everything
+worked as planned.  The Changes header filled up with literally 3000
+unchanged items, which I assume are all the files in all my dependent
+modules.  
+
+I did Commit All, and everything cleared.  As soon as I saved even 
+a change in comments to the server.js file, I got the option to commit
+my changes.  And when I looked in the top-level folder for the app,
+there was a .git file, just like I expected!
+
+Now I just have to figure out how to ge this shit up on the web and
+I'll be sailing.  
+
+
+
+--
+Comparing files.  To compare, you need an earlier file that has been
+committed and a later file that has not.  You'll know when you can 
+make a comparison because there's a little M next to the filename
+in the Staged Changes bar.  Click on the filename, and the old version
+pops up next to it.  The one that has (index) after its name is the one
+you need to close when it is done.
+
+If you have saved changes, they will not appear in the comparison.
+Only changes that have been staged in the newer one show up to be
+compared.
+
+--
+
+All changes made are made on the local drive, even commits.  To
+sync everything with the cloud, I have to do one step further, 
+and that is called a 'push'.  
+
+--
