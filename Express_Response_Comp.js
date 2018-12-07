@@ -19,9 +19,6 @@ http.createServer(function(req, res){
 URL functionality*/
 }).listen(1337,'127.0.0.1');
 
-/* The app runs until it is told to stop.  Until then, any time
-I go to port 1337 at LOCALHOST or 127.0.0.1 in the browser, 
-browser will show 'Hello World'. */
 
 
 //////////  SECOND ITERATION  ///////////
@@ -59,11 +56,11 @@ var port = process.env.PORT || 3000;
 the syntax is much neater.
 
 -There's no createServer() call - done automatically.
--No 'if()' statements for each URL.  Just specify the URL in the
-    calls of app (which is calling Express)
+-No 'if()' statements for each URL.  Just specify the URL as a 
+    parameter of .get (which is calling Express)
 -No writing to the head, and no error specification AFAICT
--The ability to respond to different HTTP verbs without if() 
-    statements, which I think is new?
+-The ability to respond to different HTTP verbs differently
+    without if() statements, which I think is new?
 */
 app.get('/', function(req, res){
     res.send("<html><head></head><body><h1>Hello Dr. Wang!</h1></body></html>");
@@ -95,9 +92,7 @@ are accessed via the .render() method.  .render() is part of
 Express, not a particular view engine.
 
 Last change is that there are different HTTP verbs besides just 
-GET.  AFAICT this is useful for allowing outside files to call
-back to the main application.  It's also RESTful, but I don't yet
-see the benefit of that. */
+GET.  I don't yet understand why this is valuable. */
 
 var bodyParser = require('body-parser');
 var app = express();
@@ -113,12 +108,13 @@ the same way.*/
 app.set('view engine','ejs');
 
 
-/* The app.use('/assets') is not used anywhere in this program.
+/* The app.use('/assets') is not used anywhere in app.js
 However, the views (aka web pages) made with the ejs view engine
-WILL sent http requests back through this app.  When they do,
+WILL sent HTTP requests back through this app.  When they do,
 they will be routed to a CSS file at this location so they can 
 all share a single stylesheet.
 */
+
 app.use('/assets', express.static(__dirname + "/public"));
 
 app.use('/', function(req, res, next){
@@ -144,3 +140,66 @@ app.post('/person', urlencodedParser, function(req, res){
 app.listen(port);
 
 ////////////   FIFTH ITERATION    ///////////////
+
+const express = require("express");
+
+/* links to the new external JS files we created to do routing. */
+
+const users = require("./routes/api/users.js");
+const profiles = require("./routes/api/profiles.js");
+const posts = require("./routes/api/posts.js");
+
+const app = express();
+
+app.get('/', (req,res) => res.send(`<h1>Small Hello<h1>`));
+
+/* 
+
+When the app is run, const users is set to be the result of calling
+require() on the given path.  This brings in whatever function that
+module contained.  Now that function can be invoked just as easily
+as a stock Javascript function just by using the variable.  
+
+This part makes sense.  It fits my previous experience of
+app.use("/url", function(req, res){} );  with the only difference
+being that in this case, the function - complete with (req, res)
+parameters - is from an outside module.  It's the next part I don't
+understand.  
+
+*/
+
+app.use("/api/users", users);
+app.use("/api/profiles", profiles);
+app.use("/api/posts", posts);
+
+const port = process.env.PORT || 5001;
+
+app.listen(port, () => console.log(`Server running on ${port}`));
+
+        ////  the users module - still part of 5th Iteration /////
+
+    /* TBH, still not sure what is happening here.   */
+
+    const express = require("express");
+    const router = express.Router();
+
+    /* First, remember that nothing goes TO this file.  Everything
+    here is loaded into server.js when the app is run.   
+    
+    My best buiess is that the way this works is that
+    EVERYTHING labelled 'router' gets exported? 
+
+    One thing I do think is happening.  I don't have to put in the 
+    whole "/api/users/test route in here.  It looks like anything
+    that is directed here just needs its final destination?"*/
+
+    router.get('/test', (req, res) => res.json({msg:"Users Works!"}));
+
+    /* Firing up the server and goign to localhost:5000/api/users
+    returns an error message saying Cannot GET /api/users 
+    */
+
+    module.exports = router;
+
+
+////////////   SIXTH ITERATION    ///////////////
