@@ -20,6 +20,50 @@ Using it feels liek any changes you make to the source code are
 reflected in the app in real time.  If I add an <h1> to an HTML page,
 it appears almost instantly with no need for me to manually restart.
 
+
+-- Execution Stack:  When Javascript runs, operations in the main code are executed
+in sequential order.  When a function is encountered, it moves to the top of the 
+execution queue and is resolved first - before the program moves on.  If there are
+nested functions, the most deeply-nested is executed first.  It's just like Magic -
+last in, first out.
+
+-- Hoisting:  Hoisting occurs in every execution context (spell on the stack) 
+After an execution context is stacked but before it is executed, JS runs through
+it and makes a couple things available immediately.  Declared functions (but not
+function expressions) are available at ANY point in the execution of the context.  
+Variables are all also declared, but their values are all set to Undefined
+and they aren't re-set to the value the programmer wants until they are reached
+during exection of the current execution object. So consider:
+
+var age = 23
+function foo(){
+    console.log(age);  
+    var age = 65;
+    console.log(age);
+}
+
+foo();
+
+this will log:
+Undefined
+65
+
+
+
+-- functions:
+function declaration:
+
+function foo(bar){}
+
+function expression:
+var foo = function(bar){}
+
+difference between the two is that a function declaration is hoisted (made available
+for use before the program is executed) while a function expression is not.  So it 
+sounds like I need a pretty good reason to use a function declaration because a
+function expression prevents me from executing a function that is declared below 
+where that function is called.  It makes the code more readable.
+
 This should be installed as a dev dependency by using the -D suffix
 to the NPM CLI install (i.e npm -D nodemon)
 
@@ -84,6 +128,9 @@ const means that the variable can't be reassigned.  This acutally
 seems like what I want in most cases, like if I'm requiring an
 outside module.  Plus, once it's assigned you just call the name
 the same way you would if it were a var.
+
+Something new I discovered.  It is true that a constant cannot be
+reassigned.  However, the values it contains can be altered.  
 
 --
 
@@ -297,5 +344,42 @@ each table has ten fields, that is your record.
 What are Promises and how do they work?
 
 --
+
+Postman is a desktop application that allows you to simulate requests to a
+server.  You can send different types, like GET or POST.  AFAICT this allows
+us to see if an API is working without having to actually build the front-end  
+first.
+
+--
+
+Encryption and hashing.  Encryption is used when a message needs to be encoded
+and then decoded again.  Hashing is used when the message
+never needs to be decoded, which is perfect for passwords.
+
+Here's the situation.  Many users use the same name and password.  If your DB is
+breached and passwords are stored in the clear, hackers could then use that info
+to get into all your other websites.
+
+Hashing solves this problem.  Hashing is an algorithm that takes a given input
+and turns it into a string of gibberish, with two key features.  First, as long
+as the input is the same, the algorithm will always generate the same string
+of gibberish.  Second, there's no systematic way to guess the input from the 
+output, even if you know what the hashing algorithm is.
+
+It's made even more difficult by salt.  Salting adds some random characters
+to your input to make it even harder to guess from the outside.
+
+So when you enter your password for the first time, it gets hashed and the
+gibberish is stored on the site's server.  Any time you go to log in, your
+password is passed to the same algorithm, and it outputs the same string
+of gibberish it did the last time.  THAT is what is compared to the gibberish
+string in the database.  If hackers crack the database, they'll have access
+to your gibberish string (and your account on that site) but because they have
+no way of guessing the input that generated it, they can't get into any other
+accounts.
+
+--
+
+-Promise.  I don't know much about it but it seems to be important.  
 
 What exactly is a DOM?-
