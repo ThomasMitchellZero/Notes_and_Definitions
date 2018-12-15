@@ -197,6 +197,9 @@ app.listen(port, () => console.log(`Server running on ${port}`));
 
     /* Firing up the server and goign to localhost:5000/api/users
     returns an error message saying Cannot GET /api/users 
+
+    I think that makes sense.  After all, we haven't set up any
+    res that actually deals with that specific URL.  
     */
 
     module.exports = router;
