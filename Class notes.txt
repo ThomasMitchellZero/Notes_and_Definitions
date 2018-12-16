@@ -383,3 +383,26 @@ accounts.
 -Promise.  I don't know much about it but it seems to be important.  
 
 What exactly is a DOM?-
+
+Still don't know!  AFAICT, the DOM is created by the browser.  It is not
+part of Javascript (although some online alluded that this might be coming)
+Instead, it's a translation of the HTML code into an object-oriented 
+representation.  This means it is useable by other programs that can manipulate
+objects (So not just Javascript!)
+
+By modeling the document as an object, it enables the page to be changed by
+scripts. 
+
+
+
+--DOM refers to the hierarchical structure of HTML code.  
+ <body>
+    <section>
+        <div>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>  
+    </section>
+ </body>
+
