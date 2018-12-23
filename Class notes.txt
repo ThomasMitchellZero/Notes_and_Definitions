@@ -98,8 +98,11 @@ What is a method?
     so 
 
 What is a primitive? - A primitive is a value with no other features.  Things like strings, numbers, 
-    and booleans are primitives.  Objects and methods are not.  It might just be anything that doesn't
-    contain an operator?
+    and booleans are primitives.  Objects are not.  It might just be anything that doesn't
+    contain an operator?  Variables containing primitives actually hold the
+    value of those primitives, while variables containing objects do not 
+    actually contain those objects.  Instead they contain a reference to the 
+    place in memory where the object is stored.
 
 module.exports =   
      so I just now understood the form of this.  Module is an object.  Exports is a property 
@@ -110,6 +113,15 @@ module.exports =
 Event Listener:
     A name for code that runs in response to the occurance of a particular
     event.  I believe they take the event as one parameter?
+
+--Objects
+
+An object is just a specific collection of properties.  Even an empty object
+is still an object. {}  Variables DO NOT store ojects.  Instead they store
+the memory location of where that object is defined.  So changing an object,
+even in a separate variable, changes it everywhere.
+
+
 
 Object Literal: An object you make and populate by hand.  For instance,
 
@@ -125,10 +137,10 @@ to make a lot of objects with the same set of properties.
 
 For instance:
 
-function cats(name, age, color){
-    this.name = name;
-    this.age = age;
-    this.color = color;
+function cats(x, y, z){
+    this.name = x;
+    this.age = y;
+    this.color = z;
 }
 
 
