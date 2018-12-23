@@ -160,13 +160,37 @@ change an object, such as:
 Walk.prototype.speed = "fast";
 
 All of Walk's child objects will get the property of .speed and the value of
-"fast" but Walk itself remains unchanged (I think.)
+"fast" but Walk itself remains unchanged (I think?)
 
 9.22.8:47pm
 
 Here's my best explanation right now.  Children don't automatically inherit ANYTHING
 from their parents.  Only members specified with the .prototype function
-are passed on.  
+are passed on. 
+
+12.22 6:03pm
+
+Newer understanding.  Whenever a method is called, Javascript first checks
+the object itself for a method with that name.  If nothing is found,
+it then checks at the next level up the prototype chain.  JS repeats this
+process until it either finds a match or gets to the Object object.
+
+Anything made by the function constructor will have the
+all the properties of the function constructor, even if they are
+undefined.  However, that's not always good.  If you have a 500-line 
+function, every child will contain the WHOLE function.  You don't want
+to be in a situation where every entry has 1k unique characters and 50k
+of repeated methods.  Your file size would be insane.
+
+Another problem.  Once something is instantiated, I don't know if changes
+to the parent propagate.  IIOW, if I change a method later, do ALL the
+children subsequently receive the new method?  If not, it's a true DRY
+nightmare.  
+
+Instead, you use the .prototype method.  That makes a function available
+to all child objects, but the child objects don't contain a copy.  However,
+they can all use the OG definition of the method because it's been
+made available via the prototype property.
 
 --
 
