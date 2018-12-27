@@ -1,0 +1,8 @@
+- For loop format
+- While loop format
+- function expression format
+- function declaration format
+- function constructor format
+- invoking function contstructor
+- random whole number between 1 and 10
+- Object.create format
