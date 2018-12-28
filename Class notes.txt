@@ -63,6 +63,8 @@ Undefined
 
 -- functions:
 
+'Calling' is when you trigger a function yourself.  'Invoking' is when it is triggered by another piece of code.
+
 A parameter is the variable in a function.  An argument is the value you
 pass into that parameter when you invoke that function. So:
 
@@ -103,6 +105,15 @@ What is a primitive? - A primitive is a value with no other features.  Things li
     value of those primitives, while variables containing objects do not 
     actually contain those objects.  Instead they contain a reference to the 
     place in memory where the object is stored.
+
+
+--  Modules:  working definition:
+
+    Used to keep pieces of code that are related to each other inside of distinct, independent, organized units.
+
+    Data encapsulation - storing critical data in methods where it can't 
+    be overwritten by other parts of the code.
+
 
 module.exports =   
      so I just now understood the form of this.  Module is an object.  Exports is a property 
@@ -366,6 +377,10 @@ not being RESTful if you use POST instead.
 
 Is this bad for any reason other than legibility?  
 
+-- Closures
+
+A closure is an inner fuction that has access to the variables and parameters (or arguments?) of its outer function, even if that outer function has already returned.  This is common in situations where a function is returning another function.  AFAICT there's no special syntax.  
+
 
 --
 
@@ -430,6 +445,13 @@ accounts.
 
 --
 
+Separation of Concerns: Each distinct group in an app is composed of operations that only talk to each other and to the level above them.  There should be no cross-talk between separate sections.  If you have this, the sections shouldn't be separate.  The idea is that you should be able to eliminate a section and everything horizontal to it should be unaffected.
+
+--
+
+-Private vs. Public: I think public just means things that are accessible from the global scope and private means things that are not.
+
+--
 -Promise.  I don't know much about it but it seems to be important.  
 
 What exactly is a DOM?-

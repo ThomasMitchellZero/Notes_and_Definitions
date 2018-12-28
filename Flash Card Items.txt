@@ -6,3 +6,7 @@
 - invoking function contstructor
 - random whole number between 1 and 10
 - Object.create format
+- HTML - how to link to an external JS file
+- HTML - how to link to an external CSS file
+- how to make an IIFE
+- Why to make an IIFE?
