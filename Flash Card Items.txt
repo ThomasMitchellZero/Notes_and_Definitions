@@ -10,3 +10,6 @@
 - HTML - how to link to an external CSS file
 - how to make an IIFE
 - Why to make an IIFE?
+- What are the five types of primitives?
+- format for ternary operator
+- format for template literals
