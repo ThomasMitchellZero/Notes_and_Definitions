@@ -13,3 +13,4 @@
 - What are the five types of primitives?
 - format for ternary operator
 - format for template literals
+- format for slicing
