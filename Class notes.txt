@@ -61,7 +61,7 @@ Undefined
 
 -- Event Bubbling: When an event is triggered on some DOM element, the same event is triggered on ALL the parent elements, up to and including the HTML element.  The element that caused the event to fire is called the 'target element'  The target element is stored as a property of the event object, so all of its parent elements will know which element was the target element of the event.   
 
---Event Delegation:  Because we know that an an event triggered on a child element will eventually bubble up to its parent, we can attach an event handler to that parent element and just wait for the trigger to bubble up to the parent.
+--Event Delegation:  Because we know that an an event triggered on a child element will eventually bubble up to its parent, we can attach an event handler to that parent element and just wait for the trigger on the child to bubble up to the parent.
 
 This is useful in two cases.  The first is when we have a lot of child elements that we are interested in.  Instead of having to replicate the event handler over and over, we just attach the event handler to the parent, knowing that we will catch EVERY trigger bubbling up from the children.
 
