@@ -180,7 +180,9 @@ reassigned.  However, the values it contains can be altered.
 --
 
 
-.prototype method = Normally, you can't make changes to an object constructor
+.prototype method = 
+
+Old understanding: Normally, you can't make changes to an object constructor
 function on the fly. If you want another property, you have to add it into
 the constructor function before the code is run.  The .prototype method
 allows you to bend that rule.
