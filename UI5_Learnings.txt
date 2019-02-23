@@ -1,0 +1,10 @@
+Five Rules of a Fiori Interface:
+
+1:  Role-based.  On the screen, you should only see options relevant to who you are.  Should use your terminology, be adapted for who you are and how you work.  
+2: Adaptive.  Works across all platforms from a single code base, and adapts to multiple use cases.
+
+3:  Coherent.  It should have a consistent look, feel, and functionality internally, and also across different platforms.
+
+4:  Simple.  Include only what is necessary.  
+
+5:  Delightful.  Violates expectations in a positive way.

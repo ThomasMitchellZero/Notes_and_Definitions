@@ -137,3 +137,13 @@ sync everything with the cloud, I have to do one step further,
 and that is called a 'push'.  
 
 --
+
+Making existing files in to a repository
+
+1. Open the GitHub desktop app
+
+2.  File > Add Local Repository
+
+3.  Select the path to the top-level folder you want to use.  If it isn't already a local reposoity (otherwise, why would you be doing this?)  you will get an option in the pop-up window saying 'This directory does not appear to be a Git repository.  Would you like to create a repository here instead?'
+
+4.  Click on that link.  It will bring up the original pop-up, with everything filled out just so.  Your repo name will be the name of the folder you selected.  Hit Creat Repository, and it will make it for you.  There will not be any duplicate folders or bullshit.  It makes it just the way you expect.
