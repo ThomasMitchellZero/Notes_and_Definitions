@@ -8,3 +8,11 @@ Five Rules of a Fiori Interface:
 4:  Simple.  Include only what is necessary.  
 
 5:  Delightful.  Violates expectations in a positive way.
+
+
+--
+
+
+Making a new page (extending the application?)
+
+1.  Start by making the basics with the app template.  In Eclipse that is New > Other... > UI5 >  application template.  Then follow the dropdowns.  This creates the correct folder structure.  
