@@ -27,3 +27,17 @@ Open questions:
 
 
 Java FX Gluon has a really good MVC explanation.  
+
+OK!  Just solved a tough problem and I think this one will come up again!  So I ran my code and got an error, something to the effect of: 
+
+ sap.ui.layout.form.SimpleForm is not a constructor
+
+ I checked my syntax and found that it was indeed a constructor.  Then, after some google-fu, what I found was that I only had one library on the index.html page.  I had:
+
+ data-sap-ui-libs="sap.m"
+
+ So the error was correct!  There was no function constructor named SimpleForm because the only library I had loaded was   sap.m    library.  Once I loaded other libraries:
+
+data-sap-ui-libs="sap.m,sap.ui.commons,sap.ui.layout,sap.ui.table"
+
+everything worked just fine!
