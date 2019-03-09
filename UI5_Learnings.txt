@@ -56,3 +56,52 @@ OK!  Just solved a tough problem and I think this one will come up again!  So I 
 data-sap-ui-libs="sap.m,sap.ui.commons,sap.ui.layout,sap.ui.table"
 
 everything worked just fine!
+
+Creating a new style:
+
+    1.  Using the Chrome developer tools, identify the HTML elements you want to change.  You can see what the changes to that element look like by adding new CSS properties in the element.style{} object.  Be warned that it can take some trial and error to get the right element and to adjust the right property.  You can use   !important   tag to get this to take precedence over any parents or shared classes, but not sure if this is best practice?
+
+    2.  Once you know what changes you want to make, copy the CSS properties into a new, blank document.  Write down where they came from.  Make a folder in the WebContent folder (customarily called    css   ) and save your new document as a .css file in this new folder.  Apparently   custom.css   is the traditional name.
+
+    3.  Grab the path to the   css   folder you just created.  In your index.html file, before your first <script> tag, add a link to your css.  For example, above would look like:  
+
+    <link rel="stylesheet" type="text/css" href="css/custom.css">  
+
+    That's how you tell the HTML where to look for the stylesheet.
+
+    4.  In your .view.js file for the page you are working on, go to the function constructors that actually produce the particular element whose style you are trying to change.  After the constuctor, call the addStyleClass("xxx") method.  "xxx" is whatever name you're going to give to call it in the CSS.  For example, a button would look like this:
+
+    const btn = new sap.m.Button("btn", {}).addStyleClass("btnCss");
+
+    Calling this method will make   btn   have the class of "btnCss" when it is rendered in the HTML.
+
+    5.  Copy the class name, then paste it into the .css file.  Don't forget to prefix the name with   .   since it is a class.  Cut all the properties you created in Chrome and paste them into the {}.  Anything with the class of "btnCss" (which your button object will, because you assigned that class with .addStyleClass() in the .view) will now have these properties.  Example:
+
+    .btnCss{
+    padding-left: 30% !important;
+    width: 60% !important;
+    }
+
+    6.  Occasionally, you'll need to change the style of a sub-element, one that you don't have a direct constructor for.  If that is the case, find a unique class on the sub-element (in this case,  .sapMBtnInner  ) and use a > to point there from the parent element with a class you did create.
+
+    .btnCss>.sapMBtnInner{
+    background: aquamarine !important;
+    }
+
+    Then apply your style like normal!
+
+
+
+OPEN QUESTIONS:
+
+How do I access a remote database?
+How do I make it so that users can log in to an application?
+x-----  How do I adjust the style-sheet/css of a UI5 app?  
+What is the manifest.json file and why is it so important?
+
+
+
+
+I'll preface by saying that this is better than anything else on Udemy about the subject, and if there's a better guide elsewhere on the web, I failed to find it.  However, the course is just not great.  Material is seriously out of date, so it's a real struggle to follow along because what's on the instructor's screen will not be on yours.
+
+Better than nothing, but not on par with the really good courses on Udemy.
