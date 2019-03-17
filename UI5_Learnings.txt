@@ -61,6 +61,11 @@ Creating a new style:
 
     1.  Using the Chrome developer tools, identify the HTML elements you want to change.  You can see what the changes to that element look like by adding new CSS properties in the element.style{} object.  Be warned that it can take some trial and error to get the right element and to adjust the right property.  You can use   !important   tag to get this to take precedence over any parents or shared classes, but not sure if this is best practice?
 
+    Sometimes, when you try to change a CSS property in the Chrome developer tools, your cursor will jump.  The way the instructor handled it is:
+        a. Go back to the original element you had selected.  Ctrl + C the name.
+        b. In the Style section, create a new 
+
+
     2.  Once you know what changes you want to make, copy the CSS properties into a new, blank document.  Write down where they came from.  Make a folder in the WebContent folder (customarily called    css   ) and save your new document as a .css file in this new folder.  Apparently   custom.css   is the traditional name.
 
     3.  Grab the path to the   css   folder you just created.  In your index.html file, before your first <script> tag, add a link to your css.  For example, above would look like:  
@@ -90,6 +95,9 @@ Creating a new style:
 
     Then apply your style like normal!
 
+    
+
+If a CSS style is greyed out in Chrome Developer Tools, there is another rule with higher priority driving that property.  How is priority assigned?  No idea.
 
 
 OPEN QUESTIONS:

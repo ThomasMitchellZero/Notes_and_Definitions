@@ -1,0 +1,12 @@
+Certain characters are not allowed in XML.  If I want to have one of the following characters in the data portion of an XML entity.
+
+"   &quot;	
+&   &amp;
+'   &apos;
+<   &lt;
+>   &gt;
+
+So putting a < between my names would look like:
+    
+    <firstName>Tom&lt;Mitchell</firstName>
+
