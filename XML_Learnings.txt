@@ -10,3 +10,8 @@ So putting a < between my names would look like:
     
     <firstName>Tom&lt;Mitchell</firstName>
 
+The other option is what is called CDATA.  The format is:
+
+    <![CDATA[
+        This is CDATA.  Any thing within these brackets will be treated as regular text and not markup.
+    ]]>
