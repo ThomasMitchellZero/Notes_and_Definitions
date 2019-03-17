@@ -1,17 +1,27 @@
-Certain characters are not allowed in XML.  If I want to have one of the following characters in the data portion of an XML entity.
+--Special Characters
 
-"   &quot;	
-&   &amp;
-'   &apos;
-<   &lt;
->   &gt;
+    Certain characters are not allowed in XML.  If I want to have one of the following characters in the data portion of an XML entity.
 
-So putting a < between my names would look like:
-    
-    <firstName>Tom&lt;Mitchell</firstName>
+    "   &quot;	
+    &   &amp;
+    '   &apos;
+    <   &lt;
+    >   &gt;
 
-The other option is what is called CDATA.  The format is:
+    So putting a < between my names would look like:
+        
+        <firstName>Tom&lt;Mitchell</firstName>
 
-    <![CDATA[
-        This is CDATA.  Any thing within these brackets will be treated as regular text and not markup.
-    ]]>
+    The other option is what is called CDATA.  The format is:
+
+        <![CDATA[
+            This is CDATA.  Any thing within these brackets will be treated as regular text and not markup.
+        ]]>
+
+--XML Schema
+    An XML Schema document is an XML file that is like a contract that determines the terms of information sharing between XML files.  (not sure what that means, so will expand when I understand).  The format is .xsd
+
+    Looks like data can have three different types, and these are defined in the schema.
+        -Inbuilt types - types that have been defined by the language.  They are things like integers, strings, decimals, dates, etc.
+        -Simple types - inbuilt types, but with conditions.  (AFAICT, all conditions are built into the language? )
+        -Complex types - elements that can have other elements inside them? Also elements that have attributes. 
