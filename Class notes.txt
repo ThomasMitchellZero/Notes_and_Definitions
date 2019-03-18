@@ -498,3 +498,10 @@ scripts.
     </section>
  </body>
 
+--Fiori Fundamentals - AFAICT, Fiori Fundamentals allows you to apply the Fiori appearance conventions to components from other frameworks, like React or Angular.  
+    Questions:  
+        -Does that just mean the ui-theme?  What capabilities from UI5 are carried over, and what ones are supplanted by their React or Angular equivalents?
+    
+        -Is there any performance advantage to doing so, or is it just to make it so that anyone who can develop with React can develop Fiori interfaces?
+
+        -Is there any advantage to doing everything in UI5?
