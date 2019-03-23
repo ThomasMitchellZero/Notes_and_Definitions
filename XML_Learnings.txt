@@ -25,3 +25,28 @@
         -Inbuilt types - types that have been defined by the language.  They are things like integers, strings, decimals, dates, etc.
         -Simple types - inbuilt types, but with conditions.  (AFAICT, all conditions are built into the language? )
         -Complex types - elements that can have other elements inside them? Also elements that have attributes. 
+
+--Importing XML Schema:
+
+    As far as I can tell, best practice is to break up your .xsd file into a bunch of different parts so that the files aren't large and incomprehensible.  If the files will only be used by one namespace they can share the namespace and be linked via <include>.  If they will be used across namespaces, they should have a unique namespace and be linked via <import>
+Open questions:
+
+    -Don't quite get the purpose of namespaces?  Why are some shared and some not?
+
+    -What exactly are all the parts of the header in the .xsd file?  
+
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/Patient" xmlns:tns="http://www.example.org/Patient" elementFormDefault="qualified">
+
+    xmlns - if I change this name, does anything happen?  Why is it pointing at a website?  What if I change the website?  
+        -AFAICT this has something to do with allowing different markup languages to be combined without fear of having tags overlap.  
+
+        -One other thing I noticed - when I went to define the root element in my schema as <element> I got an auto-fill option, complete with a name attribute.  When I removed the   xmlns="http://www.w3.org/2001/XMLSchema"   and tried again, that auto-fill option did not present itself.  
+
+    targetNamespace - why is this a website?  Do I need to change it to match my routing?  Is the URL even being accessed?  
+
+    xmls:tns - this is the same URL as the targetNamespace.  Is this just like a variable that stores the targetNamespace URL?  If not, what is it?
+        -I think this specifies the elements WE are defining.  IE, the xmlns elements are the off-the-shelf elements W3 thinks we'll need, and these are the additional ones we create that are specific to this application?
+
+        By having it specified as belonging to our URL, even if we have the same element names as a third-party XML file, our names will still be unique because ours will be <tns:name> where TNS is our unique URL.  
+
+    elementFormDefault - "qualified" what happens if this is different?
