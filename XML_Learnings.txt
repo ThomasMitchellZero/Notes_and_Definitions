@@ -29,24 +29,53 @@
 --Importing XML Schema:
 
     As far as I can tell, best practice is to break up your .xsd file into a bunch of different parts so that the files aren't large and incomprehensible.  If the files will only be used by one namespace they can share the namespace and be linked via <include>.  If they will be used across namespaces, they should have a unique namespace and be linked via <import>
+
+
 Open questions:
 
-    -Don't quite get the purpose of namespaces?  Why are some shared and some not?
+    Q: Why use namespaces at all?  What would happen if I didn't?
 
-    -What exactly are all the parts of the header in the .xsd file?  
+        A:  They are useful in situations where you are using XML files from a bunch of different sources.  In such a situation, there will likely be a bunch of elements, attributes and types with overlapping names, so if you use one where there is overlap, like "date" there's no telling what you'll get.  A namespace allows you to specify the source of the element you're using, which means you are sure to get the one you want.  If you go into a castle and ask for "Brandon" (the name) you will get a lot of responses.  If you include "of House Stark" (the namespace) you will now get the individual you want.
 
-    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/Patient" xmlns:tns="http://www.example.org/Patient" elementFormDefault="qualified">
+    Q: When should I break things into separate namespaces?
 
-    xmlns - if I change this name, does anything happen?  Why is it pointing at a website?  What if I change the website?  
-        -AFAICT this has something to do with allowing different markup languages to be combined without fear of having tags overlap.  
+
+    Q: When should I break single namespace file into multiple files sharing that namespace?
+
+
+
+
+    ------Answered -----
+    Q: What exactly are all the parts of the header in the .xsd file?  
+
+        A:  Glad you asked!  Let's go through them!    
+        
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        This specifies the default namespace and gives access to all the properties and attribues we've learned.  Do not fuck with.
+        
+        targetNamespace="http://www.example.org/Patient" 
+        This is like the class name of the elements we are creating.  URIs are common but not required, as its only purpose is to be a unique name.
+        
+        xmlns:tns="http://www.example.org/Patient" 
+        Sets a short hand variable for whatever's after the = sign. Like a const holding the namespace value so you don't have to keep writing it. 
+        
+        elementFormDefault="qualified">
+        If qualified, you have to write the namespace for any elements that don't come from the default namespace (the w3.org thing)  Leave as "qualified"
+
+    Q: xmlns - if I change this name, does anything happen?  Why is it pointing at a website?  What if I change the website?  
+
+        A: AFAICT this specifies default namespace, and it's what gives access to all the elements and attributes I've learned about.  I can't see any good reason ever to change this.  AFAICT it does NOT communicate with the website.
 
         -One other thing I noticed - when I went to define the root element in my schema as <element> I got an auto-fill option, complete with a name attribute.  When I removed the   xmlns="http://www.w3.org/2001/XMLSchema"   and tried again, that auto-fill option did not present itself.  
 
-    targetNamespace - why is this a website?  Do I need to change it to match my routing?  Is the URL even being accessed?  
+    Q:  targetNamespace - why is this a website?  Do I need to change it to match my routing?  Is the URL even being accessed?  
+    
+        A:  No, it is not.  It doesn't have to be a website.  Websites are commonly used because they are guaranteed to be unique, but the only thing the targetNamespace HAS to be is unique.  It's like how when you are naming an object in JS, you have to give it a unique name so that you can use its properties later.
 
-    xmls:tns - this is the same URL as the targetNamespace.  Is this just like a variable that stores the targetNamespace URL?  If not, what is it?
-        -I think this specifies the elements WE are defining.  IE, the xmlns elements are the off-the-shelf elements W3 thinks we'll need, and these are the additional ones we create that are specific to this application?
+    Q:  xmls:tns - this is the same URL as the targetNamespace.  Is this just like a variable that stores the targetNamespace URL?  If not, what is it?
 
-        By having it specified as belonging to our URL, even if we have the same element names as a third-party XML file, our names will still be unique because ours will be <tns:name> where TNS is our unique URL.  
+        A:  Nope, that's pretty much it!  The value we assign to the targetNamespace attribute is setting a unique identifier for this namespace, eg www.123.com/gibber.  The next attribute, the one where we say xmlns:xyz = www.123.com/gibber, that's like setting a variable called xzy = to our namespace name.  This isn't NECESSARY, but it means we can refer to elements we create as   xyz:thingy   instead of www.123.com/gibber:thingy.  It's just a shorthand time-saver.
 
-    elementFormDefault - "qualified" what happens if this is different?
+    Q:  elementFormDefault - "qualified" what happens if this is different?
+
+        A:  AFAICT, qualified means that you have to keep using your target namespace prefix on all of your elements, and unqualified means you don't.  I am going to stick with qualified because that seems to make it much easier to remember what came from where.
