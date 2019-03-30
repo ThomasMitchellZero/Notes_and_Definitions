@@ -109,7 +109,12 @@ What is the manifest.json file and why is it so important?
 
 
 
+///////////////   SAP SDK Classes and Tutorials    ////////////////////
 
-I'll preface by saying that this is better than anything else on Udemy about the subject, and if there's a better guide elsewhere on the web, I failed to find it.  However, the course is just not great.  Material is seriously out of date, so it's a real struggle to follow along because what's on the instructor's screen will not be on yours.
+-- data-sap-ui-oninit
+    this is an attribute of the <script> tag in the index.html document.  Here's what I know so far. for my hi_world document, the attribute looks like this:  data-sap-ui-oninit="module:sap/ui/demo/walkthrough/index"  and I don't know why.  
 
-Better than nothing, but not on par with the really good courses on Udemy.
+    A few things I do know.  This is a JS file that contains the application logic for starting up the app.  This is  apparently more secure than running the same logic in script tags as part of the HTML file (which is what Harrison does)  I do know that the file name (index.js) has to correspond with the last section of the path (  /index  ) because I changed them both to   cat   and it still worked.  What I don't understand is the path, because the .js file is part of my webapp, but that path points to nowhere.  What gives?
+
+-- src
+    AFAICT, it's fine to use a link to the library that SAP hosts for development, but I think for production you want to download the library and have it in a    resources   folder as part of your app.  
