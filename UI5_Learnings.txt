@@ -100,12 +100,7 @@ Creating a new style:
 If a CSS style is greyed out in Chrome Developer Tools, there is another rule with higher priority driving that property.  How is priority assigned?  No idea.
 
 
-OPEN QUESTIONS:
 
-How do I access a remote database?
-How do I make it so that users can log in to an application?
-x-----  How do I adjust the style-sheet/css of a UI5 app?  
-What is the manifest.json file and why is it so important?
 
 
 
@@ -118,3 +113,23 @@ What is the manifest.json file and why is it so important?
 
 -- src
     AFAICT, it's fine to use a link to the library that SAP hosts for development, but I think for production you want to download the library and have it in a    resources   folder as part of your app.  
+
+
+-- UIcomponent and .init
+    This definition will probably get revised a lot.  AFAICT (1 APR) when a new component is created, it is automatically initialized (i.e. the .init() method is called. )  It seems you also have to make a call to the parent class (the un-extended UIcomponent class to get this to work)  Black box this and move on.
+
+-- Manifest.json 
+    Manifest.json is a JSON object that contains all the global application settings.  This separates application code from settings, although I am not sure why this is good.
+
+-- XML Fragments 
+    XML fragments are like mini-XML views, but they do NOT have their own controller.  Usually, they are instead controlled by whatever View they are inserted into.  They are located in the Core namespace (Why, and why is that good? )
+
+
+    OPEN QUESTIONS:
+
+How do I access a remote database?
+How do I make it so that users can log in to an application?
+x-----  How do I adjust the style-sheet/css of a UI5 app?  
+What is the manifest.json file and why is it so important?
+
+Why are fragments part of the Core namespace, and not part of the MVC namespace?
