@@ -124,6 +124,12 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 -- XML Fragments 
     XML fragments are like mini-XML views, but they do NOT have their own controller.  Usually, they are instead controlled by whatever View they are inserted into.  They are located in the Core namespace (Why, and why is that good? )
 
+-- Factory Functions:
+    A factory function is any function that returns an object.  However, constructor functions and classes (i.e. constructor functions with syntactic sugar) are more specific TYPES of factory functions, so you should always say 'constructor' instead of 'factory' if you are talking about the former.  It's like how it would be weird to say you own a 'mammal' instead of a 'dog'.
+
+-- Manifest.json:
+    AFAICT the files listed in the manifest.json folder are all links to named data files, they are instantiated and loaded as named models, and they are accessible throughout the entire app.  Could be really useful.
+
 
     OPEN QUESTIONS:
 
@@ -133,3 +139,5 @@ x-----  How do I adjust the style-sheet/css of a UI5 app?
 What is the manifest.json file and why is it so important?
 
 Why are fragments part of the Core namespace, and not part of the MVC namespace?
+
+what is a helper class?
