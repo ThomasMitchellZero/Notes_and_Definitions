@@ -130,6 +130,11 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 -- Manifest.json:
     AFAICT the files listed in the manifest.json folder are all links to named data files, they are instantiated and loaded as named models, and they are accessible throughout the entire app.  Could be really useful.
 
+    I had an issue where I kept getting a 'No Data' error in my list table.  It turns out that the reason was because I didn't have the 
+
+--CORS:  
+    Ok, this thing has been hurting me repeatedly, so let me start marking     down solutions.  One of the problems I found is when I have a mismatched    namespace.  In one of my .js files I was calling a view at viewName:        "sap.ui.demo.db.view.App".  However, I hadn't yet defined the name of the resource root in the index.html file.  When I added in                          data-sap-ui-resourceroots='{"sap.ui.demo.db": "./"}' 
+    the problem went away.  Basically, the JS file was trying to use a namespace I hadn't yet defined.
 
     OPEN QUESTIONS:
 
@@ -141,3 +146,4 @@ What is the manifest.json file and why is it so important?
 Why are fragments part of the Core namespace, and not part of the MVC namespace?
 
 what is a helper class?
+
