@@ -1,0 +1,71 @@
+-I am in trouble here.  I've had a few bad sessions in a row, and I think it's because I don't have a clearly-defined mid-level goal.  
+
+0-level goal: make money programming
+1-level goal: Build a portfolio to develop m skills and have something to show.
+
+2- Here's where I am stuck.  I need to come up with some projects that I would like to show.  
+
+A) Basic business app.  What functions should I fulfill?
+
+    Add/remove business expenses
+    Chart business expenses
+
+
+
+
+B) Legrand user-feedback app.
+
+
+    User side:
+
+    Drag-boxes to rank concepts
+    Comment section
+    Multiple-choice section?
+    Save results to a database.
+    output the data as .xls file
+    Rank according to different attributes?
+    
+    Web hosting
+
+
+
+
+
+    Tester side:
+
+    Login
+    Create new test
+    
+
+It is 9:45 on 1 June and I am quite stuck.  I am getting error messages and I don't really know what to do about them.  
+
+
+-Figure out how to run my application on a server.
+
+    -Advantages 
+        - I need to learn how to do this anyways
+        - Would allow me to ask Harrison for help?
+        - Maybe would eliminate the CORS errors?
+    -Disadvantages
+        - Would take a lot of time
+        - Not sure it would solve the problem?
+
+
+-Try to clone the example application EXACTLY.  Also, add in sections piece by piece and see where the error messages occur.  This app seems pretty similar to the main practice app I produced.  Somewhere in hi_world, I did something different to prevent me from having these issues.
+
+    Advantages
+        -Seems pretty fast
+        -
+    Disadvantages
+        - If it doesn't work, what have I learned? 
+        - 
+
+-Try to make an application with nested views
+
+
+From what I can figure out, components appear to be more complex than controls. AFAICT components are meant to be shared between MULTIPLE applications, while controls are meant to be shared within ONE application.
+
+So it looks like controls are what I want.
+
+It also looks like the difference between composite controls and regular controls is that composite controls ONLY use existing controls, whereas regular controls can actually generate new HTML.  
+

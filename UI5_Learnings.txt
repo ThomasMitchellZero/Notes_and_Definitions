@@ -136,6 +136,9 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
     Ok, this thing has been hurting me repeatedly, so let me start marking     down solutions.  One of the problems I found is when I have a mismatched    namespace.  In one of my .js files I was calling a view at viewName:        "sap.ui.demo.db.view.App".  However, I hadn't yet defined the name of the resource root in the index.html file.  When I added in                          data-sap-ui-resourceroots='{"sap.ui.demo.db": "./"}' 
     the problem went away.  Basically, the JS file was trying to use a namespace I hadn't yet defined.
 
+--Hooks
+    AFAICT, hooks are a particular set of named methods that are called automatically by the UI5 core when certain events occur.  If they are empty, everything runs as normal.  But if we put functions in them, those functions will be run when that particular event occurs.  onInit() is a perfect example of this.  Any operations defined on the onInit() method will be run when a view is instantiated and its controls are already created.
+
     OPEN QUESTIONS:
 
 How do I access a remote database?
@@ -146,4 +149,29 @@ What is the manifest.json file and why is it so important?
 Why are fragments part of the Core namespace, and not part of the MVC namespace?
 
 what is a helper class?
+
+///////  CSS and Stylesheets   ///////
+
+-I think I've identified something useful.  Within a flex box, the "Align Items" property determines the vertical placement of the box's contents.  If you choose "Baseline" they will all touch the top.  "End" puts them all at the end, and "Center" puts them at the center.
+
+Meanwhile, there's a second property called 
+
+Now here's where it gets weird. In a VBox, it seems to be switched.  The "Align Items" property controls the HORIZONTAL position of the elements within.  
+
+
+///////  UI5 UI development open questions.  ///////
+
+-How do I make my own components and then insert them into other components?  Like if I want to re-use a login screen or something?
+
+-How do I do routing through UI5?
+
+-How to do logins?
+
+-getBindingContext() - how is it used, what are the benefits?
+
+-What is the best way to align view elements, especially ones in different components?
+
+-How do I change the style of type?
+
+-How do I change the global styles for a document?
 
