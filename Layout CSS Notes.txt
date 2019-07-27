@@ -1,0 +1,29 @@
+- the flex-grow property:  AFAICT, the way this works is that each element's flex-grow number is its share of the total.  For example:
+
+.one{
+    flex-grow: 1;
+}
+.two{
+    flex-grow: 2;
+}
+.three{
+    flex-grow: 3;
+}
+
+There are 6 total shares: 1+2+3.  So .three takes up 3/6 of the total space, while .one takes up only 1/6 of the total space.  
+
+Here's the tricky part.  AFAICT, this only refers to EMPTY space.  For example, say a box contains:
+
+----TEXT----
+
+When flex-grow space is being apportioned, the TEXT doesn't count.  Only the empty space (the ---- bit) is considered.
+
+-Certain properties (such as flex-grow, justify-content, etc.) only work on the main axis.  Other properties (such as align) only work on the cross axis (90 degrees to the main axis)
+
+-Justify-content controls position along the main axis.  align-items controls position along the cross axis.
+
+--Well, one of the things I am pretty sure is happening is that at least for the tags I am using (article and aside ) when I specify width as a percentage, what I'm getting is a percentage of the content, not the container.  Setting the width of <article> to 100% does not mean it takes up 100% of the parent.  What it looks like is happening is that it takes the largest element it contains - in this case, the header plus its margins, and shrinks to that.  Anything under 100% gives the same size.  The reason I think this is the case is that if I set margins to 0 and width to 100%, the box shrinks to exactly the width of the title.
+
+I can work with this, but the reason I don't like it is that if I change the contents of the title, all my positioning gets thrown off.  I need to be able to say "This box takes up X% of its container"
+
+-Headings will go to multiple lines if you shrink the screen enough.
