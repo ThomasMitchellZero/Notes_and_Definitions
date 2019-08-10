@@ -2,7 +2,7 @@ React:
 
   The life I have now, but without the parts I don't like.  I can have more money, live anywhere I want, and be in demand if I lose a job.  
 
-  + The teaching materials are a LOT better.  There are all kinds of resources that will hand-hold me through the learning process.  
+  + The teaching materials are a LOT better.  There are all kinds of resources that will hand-hold me through the learning process.  Also, if I get stuck, there are a lot more examples for me to consult, and a lot more people on the Internet who know what I am trying to figure out.
 
   + If you do this, you can learn how to do it under the umbrella of people who really know it.  You can learn from experts, and learn how to do it right.  With the UI5, you'll always be self-taught, without a real avenue to learn from people better than you.  
 
@@ -17,15 +17,20 @@ UI5:
 
   + For the same level of skill, I can make much more money doing UI5.
     
-    - Will you really be able to get those big consultant rates?  You're a n00b with no experience.  And if someone is paying you $100/hr for something you don't know how to do, won't that stress be really tough?
+    - Will you really be able to get those big consultant rates?  You're a n00b with no experience. 
 
       + Well, I don't know.  But there's clearly a lot of demand.  If I can pick and choose, I should be able to find something that's within my range to handle.
+    
+    -And if someone is paying you $100/hr for something you don't know how to do, won't that stress be really tough?
+
+      + Yes.  I will try to prepare as much as possible and take the easiest gig I can, but the first few gigs will probably hurt.
+
 
     - But how much do you really want?  Like, if you were making 125k and didn't have to worry about the supply getting cut off, wouldn't you prefer a corporate job?
 
-      + Maybe.  I think my biggest objection would be the travel.  But this job I have now is the easiest money I've ever made.  From what I can tell, tech pros don't just work 9-5.  There would be a real expectation of overtime.  
+      + Maybe.  I think my biggest objection would be the travel.  But this job I have now is the easiest money I've ever made.  From what I can tell, tech pros don't just work 9-5.  I probably wouldn't be able to find the easy corporate life I have now.
 
-      + Also, I think there really is a difference.  At 125k, I could have a better version of the life I have.  But at 200k+, I could have a qualitatively different life.
+      + Also, I think there really is a difference.  At 125k, I could have a better version of the life I have.  But at 200k+, I could have a qualitatively different life.  At 125, I would probably still guy Polar sparkles.  At 200, I would buy Spindrift because that's what I like.
   
   + With UI5, I can skip a lot of the crappy parts.  Like, if I can start subcontracting on Harrison's jobs, I can build a portfolio while getting paid,and build up my resume to the point where I can start getting work on my own.
 
@@ -35,6 +40,6 @@ UI5:
 
   - 
 
-  Basically, it seems like the difficulty is in two places.  With UI5, it's right now.  It's going to be hard to learn how to make useful things, but if I can, the road is smoother.  With React, I can get to a higher level faster, but the next few steps look a lot harder.
+  Basically, it seems like the difficulty is in different places.  With UI5, it's right now.  It's going to be hard to learn how to make useful things, but if I can, the road is smoother.  With React, I can get to a higher level faster, but the next few steps look a lot harder.  My natural inclination is to tackle the worst part of a job first while my resolve is highest.
 
 
