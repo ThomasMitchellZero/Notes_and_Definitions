@@ -185,7 +185,7 @@ outside module.  Plus, once it's assigned you just call the name
 the same way you would if it were a var.
 
 Something new I discovered.  It is true that a constant cannot be
-reassigned.  However, the values it contains can be altered.  
+reassigned.  However, the values of the properties it contains can be altered.  
 
 --
 
@@ -226,7 +226,7 @@ to be in a situation where every entry has 1k unique characters and 50k
 of repeated methods.  Your file size would be insane.
 
 Another problem.  Once something is instantiated, I don't know if changes
-to the parent propagate.  IIOW, if I change a method later, do ALL the
+to the parent propagate.  IOW, if I change a method later, do ALL the
 children subsequently receive the new method?  If not, it's a true DRY
 nightmare.  
 

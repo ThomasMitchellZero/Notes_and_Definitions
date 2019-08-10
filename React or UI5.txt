@@ -1,0 +1,40 @@
+React:
+
+  The life I have now, but without the parts I don't like.  I can have more money, live anywhere I want, and be in demand if I lose a job.  
+
+  + The teaching materials are a LOT better.  There are all kinds of resources that will hand-hold me through the learning process.  
+
+  + If you do this, you can learn how to do it under the umbrella of people who really know it.  You can learn from experts, and learn how to do it right.  With the UI5, you'll always be self-taught, without a real avenue to learn from people better than you.  
+
+  - You might be poor starting out.  Like, $45k poor.  And it's probably going to be 3+ years before you surpass what you are making now.
+
+  - Swimming the entry-level salmon ladder seems pretty daunting.  
+
+
+UI5:
+
+  Big money.  Allows me to skip a lot of bullshit - entry-level jobs, portfolio building, etc.  Juicy product-development opportunities.  I have a decent network already in place.
+
+  + For the same level of skill, I can make much more money doing UI5.
+    
+    - Will you really be able to get those big consultant rates?  You're a n00b with no experience.  And if someone is paying you $100/hr for something you don't know how to do, won't that stress be really tough?
+
+      + Well, I don't know.  But there's clearly a lot of demand.  If I can pick and choose, I should be able to find something that's within my range to handle.
+
+    - But how much do you really want?  Like, if you were making 125k and didn't have to worry about the supply getting cut off, wouldn't you prefer a corporate job?
+
+      + Maybe.  I think my biggest objection would be the travel.  But this job I have now is the easiest money I've ever made.  From what I can tell, tech pros don't just work 9-5.  There would be a real expectation of overtime.  
+
+      + Also, I think there really is a difference.  At 125k, I could have a better version of the life I have.  But at 200k+, I could have a qualitatively different life.
+  
+  + With UI5, I can skip a lot of the crappy parts.  Like, if I can start subcontracting on Harrison's jobs, I can build a portfolio while getting paid,and build up my resume to the point where I can start getting work on my own.
+
+    - Can you?  How much of HH's groaning inbox is from knowing UI5, and how much is from his 15+ years in tech and particularly SAP?
+
+      + OK, but some percentage of those jobs he's overqualified for.  I couldn't do all of them, but I could certainly do some.
+
+  - 
+
+  Basically, it seems like the difficulty is in two places.  With UI5, it's right now.  It's going to be hard to learn how to make useful things, but if I can, the road is smoother.  With React, I can get to a higher level faster, but the next few steps look a lot harder.
+
+
