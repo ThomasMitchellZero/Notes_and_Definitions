@@ -1,81 +1,77 @@
-//////////////  Big Unsolved Mysteries  ////////////
+//////////////  Conceptual Open Questions  ////////////
 
-    -  How do I access and use an external, 3rd party database?
-    -  How do I get an app up and live on the Web?
-    -  How do I handle logins?
-    -  
+    -   How do I access and use an external, 3rd party database?
+    -   How do I get an app up and live on the Web?
+    -   How do I handle logins?
+    -   How exactly does scope work in UI5?
+    -   How do I do routing through UI5?
+    -   How to do logins?
+    -   What are the rules and syntax for data-binding?
 
-    ///// Solved /////
+//////////////  Specific Open Questions  ///////////////
+
+    -Are all views created when the script in index.js is run?  Then it just shows you whichever one you have navigated to?  
+
+    -How do I make my own components and then insert them into other components?  Like if I want to re-use a login screen or something?
+
+    -getBindingContext() - how is it used, what are the benefits?
+
+    -What is the best way to align view elements, especially ones in different components?
+
+    -How do I change the style of type?
+
+    -How do I change the global styles for a document?
+
+
+
+
+
+
+x-----  How do I adjust the style-sheet/css of a UI5 app?  
+What is the manifest.json file and why is it so important?
+
+Why are fragments part of the Core namespace, and not part of the MVC namespace?
+
+what is a helper class?
+
+///// Solved /////
 
         Q:  How do I run and write UI5 apps on my computer, in VS Code, and not on SAP's web IDE?
         
             A:  Not 100% sure about the details, but running it on a local server allows you to run the app properly.  
+        
+        Q:  How do I adjust the style-sheet/css of a UI5 app?  ?
+
+            A:  In the manifest.json file, ythere is an object called "resources".  Make (or add to) the property CSS with an array containing objects.  Each object contains a URI path.  These are paths to your CSS file or files.  In the CSS file, just do CSS like normal.
 
 
-    //////////////////
+/////////////// Solved Errors //////////////////////
+
+    OK!  Just solved a tough problem and I think this one will come up again!  So I ran my code and got an error, something to the effect of: 
+
+    sap.ui.layout.form.SimpleForm is not a constructor
+
+    I checked my syntax and found that it was indeed a constructor.  Then, after some google-fu, what I found was that I only had one library on the index.html page.  I had:
+
+    data-sap-ui-libs="sap.m"
+
+    So the error was correct!  There was no function constructor named SimpleForm because the only library I had loaded was   sap.m library.  Once I loaded other libraries:
+
+    data-sap-ui-libs="sap.m,sap.ui.commons,sap.ui.layout,sap.ui.table"
+
+    everything worked just fine!
 
 
-////////////////////////////////////////////////////
 
-
-Five Rules of a Fiori Interface:
-
-1:  Role-based.  On the screen, you should only see options relevant to who you are.  Should use your terminology, be adapted for who you are and how you work.  
-2: Adaptive.  Works across all platforms from a single code base, and adapts to multiple use cases.
-
-3:  Coherent.  It should have a consistent look, feel, and functionality internally, and also across different platforms.
-
-4:  Simple.  Include only what is necessary.  
-
-5:  Delightful.  Violates expectations in a positive way.
 
 
 --
 
 
---- Making a new page (extending the application?)
-
-1.  Start by making the basics with the app template.  In Eclipse that is New > Other... > UI5 >  application template.  Then follow the dropdowns.  This creates the correct folder structure.  
-
-
---- Setting up the Model in MVC --
-
-// this is your data source, usually an off-world database.
-const oData = {}
-
-// AFAICT this creates a new Model object.
-const oModel = new sap.ui.model.json.JSONModel()
-
-// this maps your data to the Model. 
-oModel.setData(oData)
-
-// After this, you also have to map UI5 components to the appropriate data.
-
-------
-
-
-Open questions:
-
--How exactly does scope work in UI5?
-
--Are all views created when the script in index.js is run?  Then it just shows you whichever one you have navigated to?  
-
 
 Java FX Gluon has a really good MVC explanation.  
 
-OK!  Just solved a tough problem and I think this one will come up again!  So I ran my code and got an error, something to the effect of: 
 
- sap.ui.layout.form.SimpleForm is not a constructor
-
- I checked my syntax and found that it was indeed a constructor.  Then, after some google-fu, what I found was that I only had one library on the index.html page.  I had:
-
- data-sap-ui-libs="sap.m"
-
- So the error was correct!  There was no function constructor named SimpleForm because the only library I had loaded was   sap.m    library.  Once I loaded other libraries:
-
-data-sap-ui-libs="sap.m,sap.ui.commons,sap.ui.layout,sap.ui.table"
-
-everything worked just fine!
 
 Creating a new style:
 
@@ -141,6 +137,9 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 -- Manifest.json 
     Manifest.json is a JSON object that contains all the global application settings.  This separates application code from settings, although I am not sure why this is good.
 
+-- neo-app.json
+    AFACT what this does is to provide a list of route 'translations'.  So for instance, when you are developing in webIDE, your app has no actual /resources folder containing the UI5 libraries.  The neo-app.json file tell your application "Hey, when you get X URL, look for it at Y location instead.
+
 -- XML Fragments 
     XML fragments are like mini-XML views, but they do NOT have their own controller.  Usually, they are instead controlled by whatever View they are inserted into.  They are located in the Core namespace (Why, and why is that good? )
 
@@ -189,18 +188,43 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
     Routing - One of the new things I learned is that with routing, your Home page is different from your app page.  Last time, I didn't make these separate, and I think that's why it didn't work. The app page (I called it Main, should probably just call it App in the future)  AFACT the app page itself is just empty.  The Home page is what you navigate to if your URL string is otherwise empty (i.e. localhost:port/webapp/ )  
 
 
+-- oData 
+    Stands for Open Data Protocol (not Object Data)  Short version is: oData is one specific set of protocols for handling data.  (Like a person with a certification)  All SAP apps are designed to use oData, but it is an open-source protocol used by many other application types.  Apparently oData makes it easy for non-SAP clients to communicate with SAP servers.
+
+    -HTTP is stateless.  That means that once the server responds to a request from a client, it does not remember anything about the request.  It fires and forgets.
+
+    -URI and URL are not the same thing.  URL is a subset of URI.  Good description here:
+    https://blogs.sap.com/wp-content/uploads/2016/02/002_883023.jpg
+
+    -https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-2/ 
 
 
-    OPEN QUESTIONS:
+    * How to use:  
+        - I already have the Northwind oData destination set up and configured.
 
-How do I access a remote database?
-How do I make it so that users can log in to an application?
-x-----  How do I adjust the style-sheet/css of a UI5 app?  
-What is the manifest.json file and why is it so important?
+        - Next, I need to add another route to the neo-app.json file.  Not sure exactly how neo-app works, but current understanding is that it is some sort of intermediary that allows WebIDE to use external resources without CORS errors (and I only know what about half the words in that sentence actually mean.)
 
-Why are fragments part of the Core namespace, and not part of the MVC namespace?
+        -So what goes in the "routes" array of the neo-app.json file looks something like:
 
-what is a helper class?
+        {
+            "path": "/destinations/northwind",
+            "target": {
+                "type": "destination",
+                "name": "northwind"
+            },
+            "description": "Northwind OData Service"
+        }
+
+        -
+
+//////// Data-Binding  ////////
+
+    -Expression Binding:
+        What is Expression binding?
+        When should I be using it?
+        Expression binding means xxxxxxxxxx.  To use expression binding, use normal data-binding syntax, but make the first character in the brackets as an = sign. So:
+
+        numberState-"{= xxxxxxx}"
 
 ///////  CSS and Stylesheets   ///////
 
@@ -214,19 +238,10 @@ Now here's where it gets weird. In a VBox, it seems to be switched.  The "Align 
 Data Types - different from formatters, it seems they allow 2-way binding and could be useful for my index approach?  https://help.sap.com/doc/saphelp_uiaddon10/1.17/en-US/91/f37e746f4d1014b6dd926db0e91070/content.htm?no_cache=true
 
 
+
+////////////////////////////////////////////////////////
+
 ///////  UI5 UI development open questions.  ///////
 
--How do I make my own components and then insert them into other components?  Like if I want to re-use a login screen or something?
 
--How do I do routing through UI5?
-
--How to do logins?
-
--getBindingContext() - how is it used, what are the benefits?
-
--What is the best way to align view elements, especially ones in different components?
-
--How do I change the style of type?
-
--How do I change the global styles for a document?
 
