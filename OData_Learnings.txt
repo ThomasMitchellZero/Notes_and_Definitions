@@ -1,3 +1,25 @@
+  Open Questions:
+
+    -  Is OData the only external data source that allows true two-way data binding?  https://sapui5.hana.ondemand.com/#/topic/68b9644a253741e8a4b9e4279a35c247
+
+    -How am I supposed to make an API that is compatible with OData standards?
+      -Do I need hosting?
+      -What are the standards I need to comply with?
+    
+    -OData allows me to make part or all of a DB available.  What do I have to do to make an existing database OData-compliant?
+    
+    -Is this a useful thing for me to be spending time on?  
+      -Is it important to know how to consume OData?
+      -Is it important to know how to produce OData?
+    
+    -In what situations should I be using OData?  If I want my application to draw from a persistant database (i.e. not a local JSON object that doesn't change from session to session) is this my best option?
+
+    -Terminology:
+      -OData-compliant data - OData?
+      -Odata-compliant API - OData service?
+
+//////////////  OData Learnings  /////////
+
 http://www.beginners-sap.com/what-is-odata/ 
 
 https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-1/
@@ -76,29 +98,14 @@ https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-1/
 
   Here's an example of the problem OData exists to solve:  Right now, data is stored all over the web in different, incompatible formats.  It's easy to translate data from one format to another, but to ensure interoperability, everyone needs to be translating TO a single common standard.  OData is that single common standard.  
 
-  Open Questions:
-    -How am I supposed to make an API that is compatible with OData standards?
-      -Do I need hosting?
-      -What are the standards I need to comply with?
-    
-    -OData allows me to make part or all of a DB available.  What do I have to do to make an existing database OData-compliant?
-    
-    -Is this a useful thing for me to be spending time on?  
-      -Is it important to know how to consume OData?
-      -Is it important to know how to produce OData?
-    
-    -In what situations should I be using OData?  If I want my application to draw from a persistant database (i.e. not a local JSON object that doesn't change from session to session) is this my best option?
 
-    -Terminology:
-      -OData-compliant data - OData?
-      -Odata-compliant API - OData service?
 
 
 ////////////  Consuming Existing OData in UI5  ///////////////////
 
     - How this works AFAICT
 
-      1.  You add a destination from the SAP Cloud Platform (not sure how to do this without an example)
+      1.  You add a destination from the SAP Cloud Platform 
 
       2.  Add an object to the neo-app.json file containing the relevant information about the data you just added.  Looks like this:
 
@@ -111,10 +118,10 @@ https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-1/
             "description": "ES5 Demo Service"
           }
 
-      Translated into English, I think this means "When the router gets the URL of /destinations/ES5, instead of routing to that literal URL, instead look for a destination named "ES5" among the destinations we've configured for UI5  
+      Translated into English, I think this means "When the router gets the URL of /destinations/ES5, instead of routing to that literal URL, instead look for a destination named "ES5" among the destinations we've configured for UI5.   (AFAICT this configuration is in the Cockpit of the Hana Cloud Platform, and is NOT part of the UI5 code)  Also, I believe you can choose the value of the "path" property to be whatever you want.  I don't think this has to be copied from anywhere.
       
 
-      3.  In the manifest.json file, first you add a "destinations" object to the sap.app object.  The most important thing is the URI property.  For now, just know that this something that is set by the OData service creator.     For our example, it looks like this:
+      3.  In the manifest.json file, first you add a "destinations" object to the sap.app object.  The most important thing is the URI property.  For now, just know that this something that is set by the OData service creator.  We don't choose it.  For our example, it looks like this:
 
         "dataSources": {
           "ES5": {

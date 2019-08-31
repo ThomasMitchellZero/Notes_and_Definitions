@@ -7,6 +7,8 @@
     -   How do I do routing through UI5?
     -   How to do logins?
     -   What are the rules and syntax for data-binding?
+    -   What is 'destroy'?  What do I use it on, and why should I?
+    -   What is the manifest.json file and why is it so important?
 
 //////////////  Specific Open Questions  ///////////////
 
@@ -27,8 +29,8 @@
 
 
 
-x-----  How do I adjust the style-sheet/css of a UI5 app?  
-What is the manifest.json file and why is it so important?
+ 
+
 
 Why are fragments part of the Core namespace, and not part of the MVC namespace?
 
@@ -96,7 +98,7 @@ Creating a new style:
 
     Calling this method will make   btn   have the class of "btnCss" when it is rendered in the HTML.
 
-    5.  Copy the class name, then paste it into the .css file.  Don't forget to prefix the name with   .   since it is a class.  Cut all the properties you created in Chrome and paste them into the {}.  Anything with the class of "btnCss" (which your button object will, because you assigned that class with .addStyleClass() in the .view) will now have these properties.  Example:
+    5.  Copy the class name, then paste it into the .css file.  Don't forget to prefix the name with   .   since it is a class. (for an ID, the prefex is #)Cut all the properties you created in Chrome and paste them into the {}.  Anything with the class of "btnCss" (which your button object will, because you assigned that class with .addStyleClass() in the .view) will now have these properties.  Example:
 
     .btnCss{
     padding-left: 30% !important;
@@ -185,11 +187,11 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 
             There are a bunch of other properties that can be defined in each child of the targets object, but not going to get into them now.
 
-    Routing - One of the new things I learned is that with routing, your Home page is different from your app page.  Last time, I didn't make these separate, and I think that's why it didn't work. The app page (I called it Main, should probably just call it App in the future)  AFACT the app page itself is just empty.  The Home page is what you navigate to if your URL string is otherwise empty (i.e. localhost:port/webapp/ )  
+    Routing - One of the new things I learned is that with routing, your Home page is different from your app page.  Last time, I didn't make these separate, and I think that's why the routing didn't work. The app page (I called it Main, should probably just call it App in the future)  AFACT the app page itself is just empty.  The Home page is what you navigate to if your URL string is otherwise empty (i.e. localhost:port/webapp/ )  
 
 
 -- oData 
-    Stands for Open Data Protocol (not Object Data)  Short version is: oData is one specific set of protocols for handling data.  (Like a person with a certification)  All SAP apps are designed to use oData, but it is an open-source protocol used by many other application types.  Apparently oData makes it easy for non-SAP clients to communicate with SAP servers.
+    Stands for Open Data Protocol (not Object Data!)  Short version is: oData is one specific set of protocols for handling data.  All SAP apps are designed to use oData, but it is an open-source protocol used by many other application types.  Apparently oData makes it easy for non-SAP clients to communicate with SAP servers.
 
     -HTTP is stateless.  That means that once the server responds to a request from a client, it does not remember anything about the request.  It fires and forgets.
 
@@ -219,12 +221,101 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 
 //////// Data-Binding  ////////
 
-    -Expression Binding:
+    -One thing I think I have learned today - don't be shy about doing things that affect the view in the controller file, not just the view.  AFAICT it gives you more options.  Previously, I was averse to this because I thought it was bad practice - not maintaining separation of concerns.  However, I think the way I'm currently doing it ( name="{/somepath}" ) is actually MORE of a violation of SoC because you're performing logic (data-binding) in the view.  Now, I'm still going to do it that way because it's generally neat and easy, but I shouldn't feel bad about doing certain operations in the controller.
+
+    --Simple binding 
+        Where you just specify the path to the data property you want to bind to:  
+
+        <Input value="{/firstName}"/>
+    
+    --Complex binding 
+        It's where you bind additional properties to your control property (in addition to your path to the property) 
+        
+        <Input
+            value="{
+                path:'/company/name', 
+                mode: 'sap.ui.model.BindingMode.OneWay' 
+            }"
+        />  
+
+    --Composite binding 
+        It is a type of complex binding where one or more of the additional properties you are binding are additional binding paths.  If a single control property needs to reference more than one model value (i.e. a price that needs to display both a number and a currency) then this is what you use.
+
+
+
+
+    --Expression Binding:
         What is Expression binding?
         When should I be using it?
         Expression binding means xxxxxxxxxx.  To use expression binding, use normal data-binding syntax, but make the first character in the brackets as an = sign. So:
 
         numberState-"{= xxxxxxx}"
+
+    --Binding Types:
+
+        -Property Binding:
+            Binds some property of a control (i.e. the pre-made gizmos in the UI5 library) to some specific element of a data model.  So like:
+
+            <Input
+                value="{/company/name}"
+            />
+
+        -Context Binding:
+            - Basically, this allows you to set a model element as the context for a parent control.  Any binding done on the children will be relative to that context.  
+
+            So you get:
+
+            binding="{/company}"
+            value="{name}"
+            tooltip="The name of the company is '{name}'"
+
+            Instead of:
+
+            value="{/company/name}"
+		    tooltip="The name of the company is '{/company/name}'}"
+
+            In the simplest use, this saves some typing.  What appears to be the more valuable use is if I want to display values of a specific of properties, but I don't know in advance which PARENT element I'll be getting those properties from.  A good example would be a list from which I want to display some details.  
+
+            In the view:
+
+                <mvc:View
+                    controllerName="sap.ui.sample.App"
+                    xmlns="sap.m"
+                    xmlns:mvc="sap.ui.core.mvc">
+                    <Input id="companyInput"
+                        value="{name}"/>	
+                </mvc:View>
+
+            And in the controller:
+            
+                var oInput = this.byId("companyInput");
+                oInput.bindElement("/companies/0");
+
+
+
+        -Aggregation Binding (List Binding):
+
+    -- Syntax:
+
+        /   anything that starts with a slash is an absolute binding path.
+
+            anything that doesn't start with a slash is a relative binding path which just means it is resolved relative to its binding context.  AFACT this means that you don't necessarily have to specify every node in a path.  You can just go "modelName>nestedTarget" instead of "modelName>xxx/yyy/nestedTarget.
+
+        >   At some point you have to specify which model to get the data           from.  This character goes after the data model.  It isn't used         anywhere else in data binding.
+
+        ={}  This is how you indicate an expression.  Expressions are just           simple functions that calculate values directly in the view,           rather than some outside function.
+
+        ${} This is what you wrap around a binding path WITHIN an expression.       It will automatically format what it finds in the binding path          according to the target type expected by the control property you       are populating. (AFACT this is the more popular option)
+
+        %{} Same as above, but no formatting.  Whatever it gets, it passes          along unchanged.
+
+
+
+
+        
+
+
+
 
 ///////  CSS and Stylesheets   ///////
 
@@ -239,9 +330,6 @@ Data Types - different from formatters, it seems they allow 2-way binding and co
 
 
 
-////////////////////////////////////////////////////////
-
-///////  UI5 UI development open questions.  ///////
 
 
 
