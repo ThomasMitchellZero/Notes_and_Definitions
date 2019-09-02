@@ -141,7 +141,11 @@ https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-1/
 
         "https://sapes5.sapdevcenter.com/sap/opu/odata/IWBEP/GWSAMPLE_BASIC/"
 
-        WOW!  And when you go to that URL, you get a page full of XML data which I don't know what do with, but I do know is the expected output of an OData service.  SWEEEEEEEEET!  So why do all of this?  Not sure about the ins and outs, but I know that this sidesteps CORS errors.  And if I get CORS errors in the future, I might want to come back to the neo-app.json file because I think I now know how to use it.
+        WOW!  And when you go to that URL, you get a page full of XML data which I don't know what do with, but I do know is the expected output of an OData service.  SWEEEEEEEEET!  One other thing I noticed.  IIRC, an OData service provides a metadata page in addition to the actual data object.  But this link appears to ONLY show the metadata file.  Not sure how to see the actual data.  Do you need to?
+        
+        So why do all of this?  Not sure about the ins and outs, but I know that this sidesteps CORS errors.  And if I get CORS errors in the future, I might want to come back to the neo-app.json file because I think I now know how to use it.
+
+        
 
         Back to the manifest.json file.  You also add it to the model object.  In this example, the model is unnamed, or "".  The "dataSource": "ES5" property corresponds to the name of the object in dataSources.  AFAICT, this makes it the default model for the application.  
 
