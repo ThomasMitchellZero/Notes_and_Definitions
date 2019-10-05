@@ -25,6 +25,10 @@
 
     -How do I change the global styles for a document?
 
+    -what is the difference between a layout and a floorplan?  (floorplan does not refer to a literal floor plan.  It's some sort of design structure for an application.)
+
+    - What are the advantages of fragments vs. views?  When should I use a fragment instead of a view?  
+
 
 
 
@@ -65,10 +69,28 @@ what is a helper class?
     everything worked just fine!
 
 
+///// GENERAL ///////
+
+--Layout Vs. floorplan vs. framework
+    AFAICT these are not actual controls, but design patterns for how to structure an app that are well-supported by the framework.  It seems that frameworks contain layouts which contain floorplans.
+    
+    -Layout
+        AFAICT, a layout is a general design for how you arrange a whole page.  Examples are things like Dynamic Page (Shell, header, content, footer) and Flexible Column (displays multiple floorplans on a single page, and you can have up to 3 columns)
+
+    -Floorplan
+        More specific than a layout, floorplans appear to be how you structure the contents of a layout.  They're recommended design patterns for things like a worklist, a page with information about an object, or a wizard.  
+
+    -Framework
+        Not to be confused with frameworks like UI5 or React, in the Fiori context a framework is (AFAICT) a recommended structure based on a particular use case.  It's a specific combination of layout and floorplan to meet a particular, common need.  One example is an app that allows analysis of data by drilling down and viewing KPIs from a data model.
+
+    
 
 
 
---
+--Support Popup:
+    Ctrl + Alt + Shift + S brings up the UI5 support popup.  Not really sure how to use this thing, but it appears to contain a mountain of useful information.  I believe this is provided by the UI5 plugin so I need to make sure I have that installed.  
+
+/////// STYLE ///////
 
 
 
@@ -146,6 +168,10 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 -- XML Fragments 
     XML fragments are like mini-XML views, but they do NOT have their own controller.  Usually, they are instead controlled by whatever View they are inserted into.  They are located in the Core namespace (Why, and why is that good? )
 
+    Fragments can use data-binding, although you should probably use element binding to make sure that their data is in the correct context.  
+
+    AFAICT you can have use a controller, but it has to be the controller of the parent view, and it will not have its own controller like a View does.
+
 -- Factory Functions:
     A factory function is any function that returns an object.  However, constructor functions and classes (i.e. constructor functions with syntactic sugar) are more specific TYPES of factory functions, so you should always say 'constructor' instead of 'factory' if you are talking about the former.  It's like how it would be weird to say you own a 'mammal' instead of a 'dog'.
 
@@ -170,6 +196,13 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 
 -- Helper Method:  
     A helper method is used to perform a particular repetitive task common across multiple classes. This keeps us from repeating the same piece of code in multiple places.
+
+-- Private Method:
+    AFAICT, in UI5 'private method' doesn't have any functional description - i.e. they work the same as any other method.  It's just a designation that goes to show that a method is ONLY ever called within one particular controller.  Private methods are designated with an underscore in front, like:
+
+    _privateMethod: function(){}
+
+    If the method is used outside the controller, such as a method that is called by a click in the view, it should be classified as a public method, not a private one.  However, it seems that public methods CAN call private methods.  The main differentiator appears to be the source of the call.
 
 -- Expression binding
     Instead of "{/fixedProperty}", you can do "{= ${Price} > 500 ? 'Error' : 'Success'}"  It's called an expression binding because you're binding it to a the result of a function expression (i.e. writing an anonymous function)
@@ -271,7 +304,7 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 -- oData 
     Stands for Open Data Protocol (not Object Data!)  Short version is: oData is one specific set of protocols for handling data.  All SAP apps are designed to use oData, but it is an open-source protocol used by many other application types.  Apparently oData makes it easy for non-SAP clients to communicate with SAP servers.
 
-    -HTTP is stateless.  That means that once the server responds to a request from a client, it does not remember anything about the request.  It fires and forgets.
+    -HTTP is stateless. (TCP is stateful) That means that once the server responds to a request from a client, it does not remember anything about the request.  It fires and forgets.
 
     -URI and URL are not the same thing.  URL is a subset of URI.  Good description here:
     https://blogs.sap.com/wp-content/uploads/2016/02/002_883023.jpg
@@ -295,11 +328,17 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
             "description": "Northwind OData Service"
         }
 
-        -
+--Filtering
+
+    Before you can filter OData, you have to check the metadata.  A particular item, such as:
+
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Product Name" sap:sortable="false" sap:filterable="false"/>
+
+    has property  sap:filterable  set to "false".
 
 //////// Data-Binding  ////////
 
-    -One thing I think I have learned today - don't be shy about doing things that affect the view in the controller file, not just the view.  AFAICT it gives you more options.  Previously, I was averse to this because I thought it was bad practice - not maintaining separation of concerns.  However, I think the way I'm currently doing it ( name="{/somepath}" ) is actually MORE of a violation of SoC because you're performing logic (data-binding) in the view.  Now, I'm still going to do it that way because it's generally neat and easy, but I shouldn't feel bad about doing certain operations in the controller.
+    -One thing I think I have learned today - don't be shy about doing things that affect the view in the controller file, not just the view.  AFAICT it gives you more options.  Previously, I was averse to this because I thought it was bad practice - not maintaining separation of concerns.  However, I think the way I'm currently doing binding ( name="{/somepath}" ) is actually MORE of a violation of SoC because you're performing logic (data-binding) in the view.  Now, I'm still going to do it that way because it's generally neat and easy, but I shouldn't feel bad about doing certain operations in the controller.
 
     --Simple binding 
         Where you just specify the path to the data property you want to bind to:  
@@ -338,8 +377,8 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
                 value="{/company/name}"
             />
 
-        -Context Binding:
-            - Basically, this allows you to set a model element as the context for a parent control.  Any binding done on the children will be relative to that context.  
+        -Context (or Element) Binding:
+            - Basically, this allows you to set a model object as the context for a control.  That means, for instance, you could narrow the control's scope from the entire model to just one field.  AFAICT 'context' just means what part of the model the control can see.  Any binding done on the children will be relative to that context.  
 
             So you get:
 
@@ -356,22 +395,20 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 
             In the view:
 
-                <mvc:View
-                    controllerName="sap.ui.sample.App"
-                    xmlns="sap.m"
-                    xmlns:mvc="sap.ui.core.mvc">
                     <Input id="companyInput"
                         value="{name}"/>	
-                </mvc:View>
 
             And in the controller:
             
                 var oInput = this.byId("companyInput");
                 oInput.bindElement("/companies/0");
 
-
+            It seems you will frequently be using the bindElement() method in the controller for element binding operations.  
 
         -Aggregation Binding (List Binding):
+
+            Q: Is list binding just a looping application of context binding?
+
 
     -- Syntax:
 
@@ -403,8 +440,6 @@ Meanwhile, there's a second property called
 
 Now here's where it gets weird. In a VBox, it seems to be switched.  The "Align Items" property controls the HORIZONTAL position of the elements within.  
 
-
-Data Types - different from formatters, it seems they allow 2-way binding and could be useful for my index approach?  https://help.sap.com/doc/saphelp_uiaddon10/1.17/en-US/91/f37e746f4d1014b6dd926db0e91070/content.htm?no_cache=true
 
 
 
