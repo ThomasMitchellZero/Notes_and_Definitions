@@ -99,7 +99,9 @@ https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-1/
   Here's an example of the problem OData exists to solve:  Right now, data is stored all over the web in different, incompatible formats.  It's easy to translate data from one format to another, but to ensure interoperability, everyone needs to be translating TO a single common standard.  OData is that single common standard.  
 
 
+////////////  OData in Practice   ///////////////////
 
+If you want to see the actual OData being used, it's pretty easy.  
 
 ////////////  Consuming Existing OData in UI5  ///////////////////
 
@@ -159,7 +161,14 @@ https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-1/
 
         > in Web IDE, right-click the project, select New, and select HTML5 Application Descriptor.  This creates the neo-app.json file.  From here, you add in a new destination object.  
 
-  
+-- OData service
+  One new thing I've learned is that the metadata file does not contain the actual data, but it does contain data about the data.  For instance:
+
+  <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Product Name" sap:sortable="false" sap:filterable="false"/>
+
+  The sap:sortable and sap:filterable properties are both set to false.  That means that I can't use these to sort or filter data.
+
+  13 SEP 2019 - I've also just learned something else new.  Apparently the big difference between OData and other RESTful data services is the metadata.  I guess ordinary REST services don't have this?  Also, still not sure what this means but I believe the metadata describes important things about the DB (field names, methods, properties, etc.) without needing the actual data.
 
 
     

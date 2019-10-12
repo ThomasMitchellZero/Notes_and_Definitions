@@ -1,0 +1,5 @@
+//// Convenience Features ////
+
+-- To get screen to actual size, hit CTRL+1, not CTRL+0
+
+-- CRTL+Shift+' toggles the grid on and off
