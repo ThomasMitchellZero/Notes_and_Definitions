@@ -14,9 +14,18 @@
     
     -In what situations should I be using OData?  If I want my application to draw from a persistant database (i.e. not a local JSON object that doesn't change from session to session) is this my best option?
 
+    -What is the purpose of navigation properties?  In what situations should I use them?  
+
+    -What is an Association?  It seems to be related to Navigation properties, but how?  
+
+    -What is an Entity Data Model?  How does it relate to OData?
+
+
+
     -Terminology:
       -OData-compliant data - OData?
       -Odata-compliant API - OData service?
+      -entity data model - 
 
 //////////////  OData Learnings  /////////
 
@@ -99,9 +108,58 @@ https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-1/
   Here's an example of the problem OData exists to solve:  Right now, data is stored all over the web in different, incompatible formats.  It's easy to translate data from one format to another, but to ensure interoperability, everyone needs to be translating TO a single common standard.  OData is that single common standard.  
 
 
-////////////  OData in Practice   ///////////////////
+////////////  OData Terminology Comparison   ///////////////////
 
-If you want to see the actual OData being used, it's pretty easy.  
+Table terminology with OData equivalent:
+
+  RELATION DATABASE       ODATA DATA SERVICE        ODATA PROTOCOL
+  -Database               -Entity Container         -Service/workspace?
+  -Table                  -Entity set               -Collection/feed
+  -Row                    -Entity                   -Entry
+  -Column                 -Property                 -Property
+
+
+  -- OData resource: anything in the model that can has an address.  Could be as small as a property, or as large as an entity set.  Resources are often made up of other resources.  An entity set is going to be made up of entities, and those entities are going to each have individual properties.  
+
+  --Entities are usually typed (Person, product, etc.)  Current understanding is that EntityType is like a class, in the sense that it's a defined collection of named properties that any given entity is expected to have.  
+
+  -- Navigation properties are how you represent relationships from one entity to another.  AFACT, you use this when one resource includes another resource.  
+
+  xxx One thing I am noticing is that a lot of these Entity Types contain duplicate data.  I also know that in databases, there should be a single source of truth.  I assume Navigation properties are some way of dealing with this - instead of duplicating the data, you just point to the original source.
+
+  xxx Another oddity - there is a second schema in which all the EntitySet resources have plural names - and also the type EntitySet, which is not found anywhere in the first schema.  So maybe the first schema is defining the 'classes' (like 'Product'), and the second schema contains the actual tables (like 'Products' where everything with a particular 'class' is displayed?  
+
+  But then there must be some way of determining which table actually holds the unique data?
+
+  --What does it mean when an EntityType has multiple keys?
+
+  --How do the Entity Sets know which entities to display?
+
+  --How exactly does linking one EntityType to another work?
+
+
+
+  -- START HERE NEXT TIME
+
+
+https://services.odata.org/V3/Northwind/Northwind.svc/$metadata
+https://services.odata.org/V3/Northwind/Northwind.svc/Products
+https://services.odata.org/V3/Northwind/Northwind.svc/
+
+
+  --19 OCT - Some more info about metadata.  It seems that for a properly-made OData service, the metadata can ALWAYS be accessed by adding $metadata after the last   /  character in the URL.  
+
+  Another thing I've learned about the metadata is that it seems to describe the contents of the database, but doesn't include any actual data.  I think it's like - here's a table and a row with sample columns, but no data in the columns.  Also, still not sure what this means but I believe the metadata describes important things about the DB (field names, methods, properties, etc.) without needing the actual data.
+
+  AFACT the Service Document is just a lower-res version of the metadata document.  It just lists the collections (tables), while the metadata document describes the tables, plus what columns those tables contain, and the attributes (XML equivalent of properties, and not to be confused with OData properties, which are like columns) of those columns.  AFAICT, Service document also only displays Entity Sets, not Entity Types.
+
+  In the service data (aka the low-res description) document, if you add $metadata after the URL you will be taken to the metadata document.  If you add the href of one of the collections after the URL, AFACIT you will see the actual data in your browser, although it is minified and thus pretty much illegible to a human reader.  
+
+
+
+  -- Association resources - AFAICT this describes 
+
+
 
 ////////////  Consuming Existing OData in UI5  ///////////////////
 
@@ -147,8 +205,6 @@ If you want to see the actual OData being used, it's pretty easy.
         
         So why do all of this?  Not sure about the ins and outs, but I know that this sidesteps CORS errors.  And if I get CORS errors in the future, I might want to come back to the neo-app.json file because I think I now know how to use it.
 
-        
-
         Back to the manifest.json file.  You also add it to the model object.  In this example, the model is unnamed, or "".  The "dataSource": "ES5" property corresponds to the name of the object in dataSources.  AFAICT, this makes it the default model for the application.  
 
           "" : {"dataSource": "ES5"}
@@ -166,9 +222,8 @@ If you want to see the actual OData being used, it's pretty easy.
 
   <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Product Name" sap:sortable="false" sap:filterable="false"/>
 
-  The sap:sortable and sap:filterable properties are both set to false.  That means that I can't use these to sort or filter data.
+  The sap:sortable and sap:filterable properties are both set to false.  That means that I can't use these to sort or filter data.  
 
-  13 SEP 2019 - I've also just learned something else new.  Apparently the big difference between OData and other RESTful data services is the metadata.  I guess ordinary REST services don't have this?  Also, still not sure what this means but I believe the metadata describes important things about the DB (field names, methods, properties, etc.) without needing the actual data.
 
 
     

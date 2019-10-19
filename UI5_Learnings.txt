@@ -4,12 +4,21 @@
     -   How do I get an app up and live on the Web?
     -   How do I handle logins?
     -   How exactly does scope work in UI5?
-    -   How do I do routing through UI5?
-    -   How to do logins?
-    -   What are the rules and syntax for data-binding?
+        -   How do I do routing through UI5?
+        -   What are the rules and syntax for data-binding?
     -   What is 'destroy'?  What do I use it on, and why should I?
-    -   What is the manifest.json file and why is it so important?
+        -   What is the manifest.json file and why is it so important?
     -   What is the purpose of the top-level Component.js file and how does it      relate to the index.html file?
+    -   How exactly do I go about using modules?
+    -   How do I attach a common controller to a fragment?
+    -   How should I use the debugger with UI5?
+    -   How do I use factory functions?
+    -   What's a good, ironclad system for figuring out what "this" points to?
+
+
+
+/////////  Solved Conceptual Open Questions   ////////////
+
 
 //////////////  Specific Open Questions  ///////////////
 
@@ -28,18 +37,6 @@
     -what is the difference between a layout and a floorplan?  (floorplan does not refer to a literal floor plan.  It's some sort of design structure for an application.)
 
     - What are the advantages of fragments vs. views?  When should I use a fragment instead of a view?  
-
-
-
-
-
-
- 
-
-
-Why are fragments part of the Core namespace, and not part of the MVC namespace?
-
-what is a helper class?
 
 ///// Solved /////
 
@@ -81,7 +78,7 @@ what is a helper class?
         More specific than a layout, floorplans appear to be how you structure the contents of a layout.  They're recommended design patterns for things like a worklist, a page with information about an object, or a wizard.  
 
     -Framework
-        Not to be confused with frameworks like UI5 or React, in the Fiori context a framework is (AFAICT) a recommended structure based on a particular use case.  It's a specific combination of layout and floorplan to meet a particular, common need.  One example is an app that allows analysis of data by drilling down and viewing KPIs from a data model.
+        Not to be confused with frameworks like UI5 or React, in the Fiori context a framework is (AFAICT) a recommended visual structure based on a particular use case.  It's a specific combination of layout and floorplan to meet a particular, common need.  One example is an app that allows analysis of data by drilling down and viewing KPIs from a data model.
 
     
 
@@ -163,20 +160,32 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
     Manifest.json is a JSON object that contains all the global application settings.  This separates application code from settings, although I am not sure why this is good.
 
 -- neo-app.json
-    I what this does is to provide a list of route 'translations'.  So for instance, when you are developing in webIDE, your app has no actual /resources folder containing the UI5 libraries.  The neo-app.json file tell your application "Hey, when you get X URL, look for it at Y location instead.
+    I think what this does is to provide a list of route 'translations'.  So for instance, when you are developing in webIDE, your app has no actual /resources folder containing the UI5 libraries.  The neo-app.json file tells your application "Hey, when you get X URL, look for it at Y location instead.
 
 -- XML Fragments 
-    XML fragments are like mini-XML views, but they do NOT have their own controller.  Usually, they are instead controlled by whatever View they are inserted into.  They are located in the Core namespace (Why, and why is that good? )
+    XML fragments are like mini-XML views, but they do NOT have their own controller.  They are instead controlled by the controller of whatever View they are inserted into.  
 
-    Fragments can use data-binding, although you should probably use element binding to make sure that their data is in the correct context.  
+    Fragments can use data-binding, although you should probably also use element binding to make sure that their data is in the correct context.  
 
-    AFAICT you can have use a controller, but it has to be the controller of the parent view, and it will not have its own controller like a View does.
+    AFAICT you can have fragments use a controller, but it has to be the controller of the parent view.  You can map a method to a button that is in a fragment, but that button DOES NOT have a universal function.  Instead, it will run whatever function has that name in the controller of whatever view into which the fragment is inserted.  If you want it to run the same function in every location it is used, don't use a fragment.  Use a nested view.  
+
+    So it looks like the determining factor is:  Does this element contain interactive controls that need to do the same thing every time they are triggered?  If so, use a nested view.  If not, a fragment is preferred because it is lighter than a view (no controller file)
+
+    There is one other use case for fragments.  Not exactly sure of the specifics, but I believe it has to do with IDs.  IIRC a nested view should not be used more than once within a parent view because if the nested view contains any IDs, the IDs will be duplicate and cause an error.  In this case, you use a fragment.  If you want the functionality to be the same in every instance (like what you get with a nested view), AFAICT what you do is create a module containing the method you want, load that module into the parent view's controller (just like you load an SAP library, except your path is namespace/folder/modulename.js)  
+    
+    Then in your controller, you create a method (with a name that matches whatever method name you've programmed the fragment control to call, because the fragment will be trying to call a method with that name EVERY time it is activated) and then calls the actual method you want from your module.  It seems like a long, convoluted chain but doing it this way ensures that if you need to change something, you can do it once in the module and then have that change automatically propagated to the everywhere in the rest of your application.
+
+    The relevance of this is not immediately apparent, but at runtime, there is no evidence of a fragment inside of the DOM.  In other words, if you use developer tools to check the elements, you will ONLY see the contents of the fragment in the DOM hierarchy.  There will be zero indication that they came from a fragment rather than being hard-coded in place.  
+
+-- Lazy Loading
+
+    Lazy loading means that you only load a particular view or data when it is required by the user.  This is usually done by creating an XML view or fragment that will be lazily loaded, and then using the parent view's controller (JavaScript code) to place it in the DOM in response to some event, like a button press.
 
 -- Factory Functions:
     A factory function is any function that returns an object.  However, constructor functions and classes (i.e. constructor functions with syntactic sugar) are more specific TYPES of factory functions, so you should always say 'constructor' instead of 'factory' if you are talking about the former.  It's like how it would be weird to say you own a 'mammal' instead of a 'dog'.
 
 -- Manifest.json:
-    AFAICT the files listed in the manifest.json folder are all links to named data files, they are instantiated and loaded as named models, and they are accessible throughout the entire app.  Could be really useful.
+    AFAICT the files listed in the manifest.json folder are all links to named data files, they are instantiated and loaded as named models, and they are accessible throughout the enntire app.  Could be really useful.
 
     I had an issue where I kept getting a 'No Data' error in my list table.  It turns out that the reason was because I didn't have the 
 
@@ -195,7 +204,7 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
     in a hash-based URL, you'll have a /#/ element somewhere in your URL.  AFAICT, anything after the /#/ sign is handled on the client side, not the server side.  An added benefit of this is that the app never has to re-load during navigation.
 
 -- Helper Method:  
-    A helper method is used to perform a particular repetitive task common across multiple classes. This keeps us from repeating the same piece of code in multiple places.
+    A helper method is used to perform a particular repetitive task common across multiple classes. This keeps us from repeating the same piece of code in multiple places.  (What is the best place to define a helper method? Is it as a JS module, or by extending the base Controller?  No idea)
 
 -- Private Method:
     AFAICT, in UI5 'private method' doesn't have any functional description - i.e. they work the same as any other method.  It's just a designation that goes to show that a method is ONLY ever called within one particular controller.  Private methods are designated with an underscore in front, like:
@@ -283,6 +292,8 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 
 --Routing:
 
+        
+
         routes: 3 main properties:
 
             name:  The name of the route (functions a lot like an ID in HTML) It is a shorthand description of the route, and MUST be unique in your routing instance (AFAICT this just means don't re-use names in the same app)
@@ -298,7 +309,7 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 
             There are a bunch of other properties that can be defined in each child of the targets object, but not going to get into them now.
 
-    Routing - One of the new things I learned is that with routing, your Home page is different from your app page.  Last time, I didn't make these separate, and I think that's why the routing didn't work. The app page (I called it Main, should probably just call it App in the future)  AFAICT the app page itself is just empty.  The Home page is what you navigate to if your URL string is otherwise empty (i.e. localhost:port/webapp/ )  
+    Routing - One of the new things I learned is that with routing, your Home page is different from your app page.  Last time, I didn't make these separate, and I think that's one reason the routing didn't work. The app page (I called it Main, should probably just call it App in the future)  AFAICT the app page itself is just empty.  The Home page is what you navigate to if your URL string is otherwise empty (i.e. localhost:port/webapp/ )  
 
 
 -- oData 
@@ -412,7 +423,7 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 
     -- Syntax:
 
-        /   anything that starts with a slash is an absolute binding path.
+        /   anything that starts with a slash is an absolute binding path.          AFAICT this means it will be resolved to that specific binding path     NO MATTER what the binding context is.
 
             anything that doesn't start with a slash is a relative binding path which just means it is resolved relative to its binding context.  I this means that you don't necessarily have to specify every node in a path.  You can just go "modelName>nestedTarget" instead of "modelName>xxx/yyy/nestedTarget.
 
@@ -420,7 +431,7 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 
         ={}  This is how you indicate an expression.  Expressions are just           simple functions that calculate values directly in the view,           rather than some outside function.
 
-        ${} This is what you wrap around a binding path WITHIN an expression.       It will automatically format what it finds in the binding path          according to the target type expected by the control property you       are populating. (I this is the more popular option)
+        ${} This is what you wrap around a binding path WITHIN an expression.       It will automatically format what it finds in the binding path          according to the target type expected by the control property you       are populating. (I think this is the more popular option)
 
         %{} Same as above, but no formatting.  Whatever it gets, it passes          along unchanged.
 
