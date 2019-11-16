@@ -14,6 +14,7 @@
     -   How should I use the debugger with UI5?
     -   How do I use factory functions?
     -   What's a good, ironclad system for figuring out what "this" points to?
+    -   How do I do security and accounts?
 
 
 
@@ -86,6 +87,34 @@
 
 --Support Popup:
     Ctrl + Alt + Shift + S brings up the UI5 support popup.  Not really sure how to use this thing, but it appears to contain a mountain of useful information.  I believe this is provided by the UI5 plugin so I need to make sure I have that installed.  
+
+
+////// Creating a new app from a starter template ///////////////
+
+     The way I want this to work is to be cable to copy a template app and list EVERY change I have to make to set it up to run on its own.
+
+
+
+    I have now discovered that there is an easy way to change the app.  
+
+        -Copy the ProjNamePlaceholder folder and rename it.
+
+        -Open the very top-level folder - the UI5_Apps folder (not the actual application folder) in VS Code.  If you don't do this, you can still do the following ops on the webapp folder, but you'll have to change all the files in the application folder by hand.
+
+        -Right-click the folder of the newly-named app.  There's an option called Find in Folder.  Click it.
+
+        -Enter ProjNamePlaceholder in the Search box.  It will bring up every instance where that name is used in the code.  Below it is a box called Replace.  Fill that with whatever you named this new folder.  Then, click the Replace All button next to the Replace input field.  That will replace every instance of the old name in EVERY file in the app folder with the new name.
+
+        -Do the same thing but with NamespacePlaceholder and whatever you want your new namespace to be.  Congrats!  All vestiges of the old app should be cleared away and the new app should be ready to go.
+
+        -Don't try to do them both at the same time.  The reason is that some paths are separated with  /   and some have  .  between nodes.  Doing it as two searches gets every pair, and also any singletons that might be floating around.
+        
+
+
+
+        
+
+
 
 /////// STYLE ///////
 

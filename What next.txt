@@ -69,3 +69,19 @@ So it looks like controls are what I want.
 
 It also looks like the difference between composite controls and regular controls is that composite controls ONLY use existing controls, whereas regular controls can actually generate new HTML.  
 
+//////////////  9 NOV 2019  /////////////////
+
+Here is my situation.  I've pretty much reached the end of the UI5 classes.
+
+OPTIONS:
+
+    -Take the newer, more recent course on OpenSAP
+
+    -Try a different course?
+
+    -Try to identify gaps in my knowledge and try to fill them myself.
+
+
+
+
+

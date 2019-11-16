@@ -7,10 +7,7 @@
       -What are the standards I need to comply with?
     
     -OData allows me to make part or all of a DB available.  What do I have to do to make an existing database OData-compliant?
-    
-    -Is this a useful thing for me to be spending time on?  
-      -Is it important to know how to consume OData?
-      -Is it important to know how to produce OData?
+  
     
     -In what situations should I be using OData?  If I want my application to draw from a persistant database (i.e. not a local JSON object that doesn't change from session to session) is this my best option?
 
@@ -27,11 +24,19 @@
       -Odata-compliant API - OData service?
       -entity data model - 
 
+
+/////////  Answered Questions ///////////////////
+
+    Q: Is this a useful thing for me to be spending time on?  
+    A: Yes.  Specifically, learning how to produce and expose OData is not the most important thing, but knowing how to consume it will be really important in your career.  You should be able to look at a metadata document and have a pretty good idea of what data and fields you are looking at.  
+
+
 //////////////  OData Learnings  /////////
 
 http://www.beginners-sap.com/what-is-odata/ 
 
-https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-1/
+https://blogs.sap.com/2016/03/01/odata-everything-that-you-need-to-know-part-7/
+
 
 -TCP/IP
   -HTTP
@@ -74,7 +79,7 @@ https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-1/
 
   -A REST resource is just something provided by a server that follows the REST   protocol rules.
 
-  -A Representation is the form in which that resource is delivered.  A representation is NOT the data it is based on - it is a clone, and it may be packaged in a different way since the OData standard only supports JSON and XML (i.e. a CSV file converted to JSON).  For example, the same resource could be represented in JSON as:
+  -A Representation is the form in which that resource is delivered.  A representation is NOT the data it is based on - it is a clone, and the original may be packaged in a different way since the OData standard only supports JSON and XML (i.e. a CSV file converted to JSON).  For example, the same resource could be represented in JSON as:
 
     {
     "id": 1,
@@ -91,7 +96,9 @@ https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-1/
       <email>john.doe@example.com</email>
     </user>
 
-  AFAICT a client can specify the representation it wants to receive as part of the header in the server request.  So for instance, when performing a GET to the URL /app/users/1, you'll add the HTTP header Accept with the application/json value to tell the server the representation the client accepts.  Clients can interact with representations, but they can never interact directly with resources.
+  Another benefit of using representations goes back to the main purpose of OData - to be a set of universal protocols for sending and receiving data.  For instance, a SQL database is obviously not JSON, but by representing it in JSON format, it can be shared and consumed by any application.  The application does not even need to know how the original data was stored.  All it needs is the REPRESENTATION of the data that's exposed by the OData service.
+
+  AFAICT a client can specify the representation it wants to receive as part of the header in the server request.  So for instance, when performing a GET to the URL /app/users/1, you'll add the HTTP header Accept with the application/json value to tell the server the representation that you will accept.  Clients can interact with representations, but they can never interact directly with resources.  There are many client-side libraries that exist to represent a variety of data types into ATOM or JSON formats for use in OData.
 
   -Prior to REST, websites used SOAP (Simple Object Access Protocol)  AFAICT the difference is that with SOAP, you use XML to make a request, and you need different XML for every request you want to make.  With REST, your request is (nearly?) ALWAYS just an HTTP verb and a URL.  
 
@@ -136,6 +143,8 @@ Table terminology with OData equivalent:
   --How do the Entity Sets know which entities to display?
 
   --How exactly does linking one EntityType to another work?
+
+  --Most of the EntityTypes have a Key, which I think is its unique identifier.  But some have multiple keys?  Let me venture a guess here.  This is in a situation where one entity in a set (like an Order) might contain multiple resources (like different Products)  So if you want to see a detail, the unique identifier would be the OrderID, and then the specifc ProductID you are looking at from within that order?  
 
 
 
