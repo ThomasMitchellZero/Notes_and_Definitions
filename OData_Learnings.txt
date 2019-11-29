@@ -33,6 +33,8 @@
 
 //////////////  OData Learnings  /////////
 
+
+
 http://www.beginners-sap.com/what-is-odata/ 
 
 https://blogs.sap.com/2016/03/01/odata-everything-that-you-need-to-know-part-7/
@@ -105,6 +107,11 @@ https://blogs.sap.com/2016/03/01/odata-everything-that-you-need-to-know-part-7/
 -- OData
 
   “OData is short for Open Data Protocol and it is an open-source protocol to allow the creation and consumption of queryable and interoperable RESTful APIs in a simple and standard way.”  That is the official definition.  Once I understand what that means, I will understand OData. 
+
+  -URI and URL are not the same thing.  URL is a subset of URI.  Good description here:
+    https://blogs.sap.com/wp-content/uploads/2016/02/002_883023.jpg
+
+    -https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-2/ 
   
   SAP has adopted OData to make SAP data (and databases?) accessible to and operable by non-SAP systems. It is not owned by SAP, and it was actually created by Microsoft.  OData is open-source and owned by no one.
 
@@ -148,9 +155,6 @@ Table terminology with OData equivalent:
 
 
 
-  -- START HERE NEXT TIME
-
-
 https://services.odata.org/V3/Northwind/Northwind.svc/$metadata
 https://services.odata.org/V3/Northwind/Northwind.svc/Products
 https://services.odata.org/V3/Northwind/Northwind.svc/
@@ -176,6 +180,15 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
 
       1.  You add a destination from the SAP Cloud Platform 
 
+        -Click on the Home icon in Web IDE.  
+        -In the Helpful Links box, click on SAP Cloud Platform Cockpit link
+        -In the menu bar on the right, click on Destinations (inside the Connectivity header)
+        -Click the New Destination button
+        -Fill out the boxes. AFAICT Name and URL are the important ones.  The URL should NOT be the full URL AFAICT.  I think you want as close to the root URL as possible.  You will provide more specific URL information in a later step.
+        -Once it is created, hit the Check Connection button to make sure it's working.  You should get an HTTP response of 200 if it is working correctly.
+
+
+
       2.  Add an object to the neo-app.json file containing the relevant information about the data you just added.  Looks like this:
 
         	{
@@ -190,7 +203,7 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
       Translated into English, I think this means "When the router gets the URL of /destinations/ES5, instead of routing to that literal URL, instead look for a destination named "ES5" among the destinations we've configured for UI5.   (AFAICT this configuration is in the Cockpit of the Hana Cloud Platform, and is NOT part of the UI5 code)  Also, I believe you can choose the value of the "path" property to be whatever you want.  I don't think this has to be copied from anywhere.
       
 
-      3.  In the manifest.json file, first you add a "destinations" object to the sap.app object.  The most important thing is the URI property.  For now, just know that this something that is set by the OData service creator.  We don't choose it.  For our example, it looks like this:
+      3.  In the manifest.json file, first you add a "dataSources" object to the    sap.app     object.  The most important thing is the URI property.  For now, just know that this something that is set by the OData service creator.  We don't choose it.  For our example, it looks like this:
 
         "dataSources": {
           "ES5": {
@@ -201,6 +214,8 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
             }
           }
         }
+
+        Make sure the odataVersion property is set to the same version as your OData service was created with.  
 
         Remember, we configured a destination named "ES5" with a URL of https://sapes5.sapdevcenter.com.  We then configured a path in our neo-app.json file where "ES5" corresponds to the route of /destinations/ES5. SO, to get the URL we want to use for the manifest.json file, it's (neo-app path) + (specific URL) So:  
 
@@ -214,9 +229,12 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
         
         So why do all of this?  Not sure about the ins and outs, but I know that this sidesteps CORS errors.  And if I get CORS errors in the future, I might want to come back to the neo-app.json file because I think I now know how to use it.
 
-        Back to the manifest.json file.  You also add it to the model object.  In this example, the model is unnamed, or "".  The "dataSource": "ES5" property corresponds to the name of the object in dataSources.  AFAICT, this makes it the default model for the application.  
+      4.  Back to the manifest.json file.  If you want to have this model accessible throughout the app as a named model (AFAICT you would always want this) then you have to do something else.  In the "models" object of the "sap.ui5" object (right by your "i18n" model) you create a new named object.  
+      
+      Choose a name for your model, like "productData" or something.  If you want the model to be the default model, just call it "" (an empty string) The "dataSource": "ES5" property corresponds to the name of the object in dataSources.  AFAICT, this makes it the default model for the application.  
 
-          "" : {"dataSource": "ES5"}
+          "ProductData" : {"dataSource": "ES5"}
+
 
 
     - First step 

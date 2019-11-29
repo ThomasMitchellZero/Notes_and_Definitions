@@ -295,6 +295,7 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 
     The other great thing about custom types is how they relate to data binding.  Remember, data-binding allows you to specify a type as a parameter.  (gotta use complex binding, but still).  I could be wrong, but I THINK the InternalValue is what gets stored in the model.  i.e. after it's been validated, it gets stored.  It also gets stored as its specificed, type, so the app always knows how to pack and unpack it.  It's like a universal machine that standardizes inputs and pretties up outputs. THAT IS FUCKING COOL.  
 
+
     Example:
 
         <ObjectListItem
@@ -311,7 +312,7 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
             }"
 
     Here's what's happening.  We're filling in the parameters expected by the 
-    ObjectListItem control.  One of those parameters is 'number'.  Now, we could pass it a simple binding, but instead we are going to change its type on the fly.  "Currency" is a specific UI5 datatype, just like a string or integer.  It needs both a number and a currency.  So we tell the model we're making it into a currency with:
+    ObjectListItem control.  One of those parameters is 'number'.  Now, we could pass it a simple binding, but instead we are going to change its type on the fly.  "Currency" is a specific UI5 datatype, just like a string or integer.  It needs both a number and a currency.  So we tell the model we're making this particular item into a currency with:
     
     type: 'sap.ui.model.type.Currency'
 
@@ -322,6 +323,7 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 --Routing:
 
         
+    You set up your routes in the manifest.json file.  In that file:
 
         routes: 3 main properties:
 
@@ -340,33 +342,36 @@ If a CSS style is greyed out in Chrome Developer Tools, there is another rule wi
 
     Routing - One of the new things I learned is that with routing, your Home page is different from your app page.  Last time, I didn't make these separate, and I think that's one reason the routing didn't work. The app page (I called it Main, should probably just call it App in the future)  AFAICT the app page itself is just empty.  The Home page is what you navigate to if your URL string is otherwise empty (i.e. localhost:port/webapp/ )  
 
+    -Setting up Home page
+        -This is pretty easy but I will record the steps just in case.
+
+        -Create a new view called Home.view.xml in the View folder.  Copy-paste the contents of the Main view, but change the controllerName property to end with .controller.Home
+
+        -Create the corresponding contoller called Home.controller.js in the Controller folder.  Change Controller.extend string argument so that it ends with .controller.Home
+
+        -In the manifest.json file, add a new unnamed object to the Routes array.  Should look like:
+
+            {
+				"name": "Home",
+				"pattern": "",
+				"target":["TargetHome"]
+			}
+        
+        -Then, in the  "targets" object, add in the target object for Home.  Remember, the name of this object can be whatever you want, but it MUST match a name listed in the array of the "target" property above:
+
+            "TargetHome":{
+					"viewType": "XML",
+					"transition": "slide",
+					"viewName": "Home"
+				},
+
 
 -- oData 
     Stands for Open Data Protocol (not Object Data!)  Short version is: oData is one specific set of protocols for handling data.  All SAP apps are designed to use oData, but it is an open-source protocol used by many other application types.  Apparently oData makes it easy for non-SAP clients to communicate with SAP servers.
 
     -HTTP is stateless. (TCP is stateful) That means that once the server responds to a request from a client, it does not remember anything about the request.  It fires and forgets.
 
-    -URI and URL are not the same thing.  URL is a subset of URI.  Good description here:
-    https://blogs.sap.com/wp-content/uploads/2016/02/002_883023.jpg
-
-    -https://blogs.sap.com/2016/02/08/odata-everything-that-you-need-to-know-part-2/ 
-
-
-    * How to use:  
-        - I already have the Northwind oData destination set up and configured.
-
-        - Next, I need to add another route to the neo-app.json file.  Not sure exactly how neo-app works, but current understanding is that it is some sort of intermediary that allows WebIDE to use external resources without CORS errors (and I only know what about half the words in that sentence actually mean.)
-
-        -So what goes in the "routes" array of the neo-app.json file looks something like:
-
-        {
-            "path": "/destinations/northwind",
-            "target": {
-                "type": "destination",
-                "name": "northwind"
-            },
-            "description": "Northwind OData Service"
-        }
+    See OData Learnings document for more details.
 
 --Filtering
 
