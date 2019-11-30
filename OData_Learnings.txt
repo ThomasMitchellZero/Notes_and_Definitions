@@ -170,13 +170,16 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
 
 
 
-  -- Association resources - AFAICT this describes 
-
-
-
 ////////////  Consuming Existing OData in UI5  ///////////////////
 
-    - How this works AFAICT
+
+  NEW, NOT EXPLORED YET: Claims to be a deep dive into OData:
+
+  https://developers.sap.com/mission.scp-3-odata.html
+
+
+
+    - Steps before you can consume existing OData:
 
       1.  You add a destination from the SAP Cloud Platform 
 
@@ -203,7 +206,7 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
       Translated into English, I think this means "When the router gets the URL of /destinations/ES5, instead of routing to that literal URL, instead look for a destination named "ES5" among the destinations we've configured for UI5.   (AFAICT this configuration is in the Cockpit of the Hana Cloud Platform, and is NOT part of the UI5 code)  Also, I believe you can choose the value of the "path" property to be whatever you want.  I don't think this has to be copied from anywhere.
       
 
-      3.  In the manifest.json file, first you add a "dataSources" object to the    sap.app     object.  The most important thing is the URI property.  For now, just know that this something that is set by the OData service creator.  We don't choose it.  For our example, it looks like this:
+      3.  In the manifest.json file, first you add a "dataSources" object to the    sap.app     object.  For our example, it looks like this:
 
         "dataSources": {
           "ES5": {
@@ -215,13 +218,31 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
           }
         }
 
-        Make sure the odataVersion property is set to the same version as your OData service was created with.  
+        -Not currently sure how to tell which version your OData is using.
 
-        Remember, we configured a destination named "ES5" with a URL of https://sapes5.sapdevcenter.com.  We then configured a path in our neo-app.json file where "ES5" corresponds to the route of /destinations/ES5. SO, to get the URL we want to use for the manifest.json file, it's (neo-app path) + (specific URL) So:  
+        -The most important property is the URI property.  We get the value from the OData service provider.  Remember, we configured a destination named "ES5" with a URL of https://sapes5.sapdevcenter.com.  We then configured a path in our neo-app.json file where "ES5" corresponds to the route of /destinations/ES5. 
+        
+        SO, to get the URL we want to set as the URI property, it's:
+        
+        (neo-app path) 
+        + (whole URL - the root URL we configured in the Cloud Platform Cockpit)
+        
+        So:  
 
+        neo-app path is: 
+        /destinations/ES5
+
+        The whole URL is:
+        https://sapes5.sapdevcenter.com/sap/opu/odata/IWBEP/GWSAMPLE_BASIC/
+
+        And the part of the URL we already configured with Cloud Platform is:
+        https://sapes5.sapdevcenter.com
+
+        So we replace the Cloud Platform bit with the neo-app path and we get:
         "/destinations/ES5/sap/opu/odata/IWBEP/GWSAMPLE_BASIC/"
 
-        actually leads to a URL of: 
+        
+        So when the app goes to get the OData, it will replace the /destinations/ES5 section with https://sapes5.sapdevcenter.com and that will lead to the full URL of: 
 
         "https://sapes5.sapdevcenter.com/sap/opu/odata/IWBEP/GWSAMPLE_BASIC/"
 
@@ -231,18 +252,52 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
 
       4.  Back to the manifest.json file.  If you want to have this model accessible throughout the app as a named model (AFAICT you would always want this) then you have to do something else.  In the "models" object of the "sap.ui5" object (right by your "i18n" model) you create a new named object.  
       
-      Choose a name for your model, like "productData" or something.  If you want the model to be the default model, just call it "" (an empty string) The "dataSource": "ES5" property corresponds to the name of the object in dataSources.  AFAICT, this makes it the default model for the application.  
+      Choose a name for your model, like "productData" or something.  
 
           "ProductData" : {"dataSource": "ES5"}
+      
+      If you want the model to be the default model, just call it "" (an empty string) The "dataSource": "ES5" property corresponds to the name of the object in dataSources.  AFAICT, this makes it the default model for the application.  
 
 
+    -- Northwind
+      When setting up the destination in the Cloud Platform Cockpit, I found that checking the connection on different subsets of the URL resulted in different responses.
 
-    - First step 
-      is to configure the destination to the OData service in the application settings.  This is done by creating and adapting a Cloud Connectivity configuration of the application which is defined in the neo-app.json file.  (I don't know what any of this means)  
+      https://services.odata.org/V2/Northwind/Northwind.svc/
+      "501: Not Implemented"
 
-      neo-app.json contains project settings for WebIDE.  I don't think it is used outside of WebIDE, but not sure.  
+      https://services.odata.org/V2/Northwind/
+      "403: Forbidden"
 
-        > in Web IDE, right-click the project, select New, and select HTML5 Application Descriptor.  This creates the neo-app.json file.  From here, you add in a new destination object.  
+      https://services.odata.org/V2/
+      "200: OK"
+
+    -- A description of what all the parts of consuming OData are doing.  (fill this in)
+
+      -Cloud Platform Destinations:
+        This is the actual root of the URL of the server you want to get OData from.  AFACIT you don't have to go all the way down to the root - you could put the direct URL of the OData service here if you wanted - but it is good practice because you don't have to configure a separate destination for every OData entity set you want to consume from the same server.  You just use the neo-app prefix and then concatenate it with the specific part of the URL that corresponds to the entity set you want.
+
+          /neo-app/prefix/ + entity set  A URL
+          /neo-app/prefix/ + entity set  B URL
+          /neo-app/prefix/ + entity set  C URL
+
+      -neo-app.json
+        This is where we actually define our prefixes.  I'm not sure exactly how this works, but AFAICT it has something to do with not violating CORS in the WebIDE.
+
+        There's a detailed explanation above, but the objects in this file make the connection between configured destinations in the Cloud platform and the paths (or 'prefixes') designated in this file.  The important thing is that the target.name property matches a configured property in the Cloud Platform.
+    
+        AFAICT this plus the Cloud Platform takes the place of a proxy server.
+
+      -manifest.json
+
+        -dataSources
+          I think this is where the call that will be made to an external server is actually defined.  In the dataSources object, we have the URL to the specific entity set (via prefix + specific URL)
+
+        -models
+          AFAICT this is where the data is actually turned into a model.  I believe the actual OData is cloned on the client side and then turned into a model.  If I delete the models, the empty app still runs just fine.  
+
+          I also think that this is where the call to the OData server is actually made.  If I mess up both URLs and delete one model, 
+      
+      
 
 -- OData service
   One new thing I've learned is that the metadata file does not contain the actual data, but it does contain data about the data.  For instance:
