@@ -81,6 +81,29 @@ OPTIONS:
 
     -Try to identify gaps in my knowledge and try to fill them myself.
 
+//////////// 30 NOV 2019  //////////////////////////
+
+Well, here I am.  Still stuck.  I think a big part of the reason why I WANT to dive into the UX project is because I have a clear idea of what I want to build.  For UI5, I really have no objective, and thus I have no drive.
+
+First question - if Harrison does not kick me work, how will I learn?
+    -The problem is that most UI5 developer roles seem to want people who know a LOT of stuff, like Node and such.  
+
+    -Even with UI5, I really have no idea what is good and what isn't.  What I really want is to work as a junior developer under the umbrella of someone who really knows their shit.  I can get help if I am stuck, and the project won't fail if I have 95% of the required knowledge and not 100%.
+
+    -Now, there may be roles like that out there.  That part is not impossible.  I might need to fish for a while until I can find the right role, but if I am going to do that, I will need a few demo projects.
+
+    -If Harrison comes through: 
+    Everything is good.  I hit pause on the UX design, work on UI5, and hopefully get over the hump with the benefit of real-world experience and someone to ask questions.
+
+    -If he does not - U15:
+    I continue to muddle through.  I build a few sample apps, and fish for opportunities to work as a junior.  If I have a UX portfolio, maybe that helps me land a job?  Like - I don't have all the skills for this job, but I have adjacent skills that are useful?
+
+    -If he does not - UX:
+    I fish for UX jobs until I find one I like.  From there, I'm in regular contact with developers.  Maybe I can leverage that and eventually grow into a developer role?
+
+    Honestly, right now I feel like the UX work is the play.  If I can work with Harrison, I'll quickly speed past any progress I would make on my own.  If I can't, I feel like I've got a much better shot at landing a UX role than a UI5 role.  UX for the rest of the day.
+
+
 
 
 
