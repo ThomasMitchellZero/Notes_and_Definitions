@@ -1,0 +1,38 @@
+Advice from Dave:
+    -Having no UI5 experience is OK.  If I stretch the truth too much they are going to wonder why I'm looking for a junior position with 4 years of experience.
+
+    -Things with "junior" in the title are good because that implies that there's a "senior" somewhere around there.
+
+    -Face-to-face work is best because that's how you build a network.
+
+    -It's not critical to have work to show.  He has never shown anything in most of his interviews.
+
+
+Resume Sections:
+
+Professional Profile:
+
+TL:DR I am a UX designer and I want to become a developer.
+
+Experience:
+
+    Legrand: UX/product designer
+        
+        UX design for mobile and desktop
+        Wireframe>Prototype>Final Design
+        Icon design
+        User testing and research
+        Journey mapping
+    
+    Coca-Cola:
+        Retail experience designer
+        Customer journey
+
+        Maybe write the email I would send to Matt?
+
+
+
+Skills:
+
+
+Bio:  Degree, contact info, links to portfolio.  (I should have a portfolio)

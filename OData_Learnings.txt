@@ -28,12 +28,10 @@
 /////////  Answered Questions ///////////////////
 
     Q: Is this a useful thing for me to be spending time on?  
-    A: Yes.  Specifically, learning how to produce and expose OData is not the most important thing, but knowing how to consume it will be really important in your career.  You should be able to look at a metadata document and have a pretty good idea of what data and fields you are looking at.  
+    A: Yes.  Specifically, learning how to produce and expose OData is not the most important thing, but knowing how to CONSUME it will be really important in your career.  You should be able to look at a metadata document and have a pretty good idea of what data and fields you are looking at.  
 
 
 //////////////  OData Learnings  /////////
-
-
 
 http://www.beginners-sap.com/what-is-odata/ 
 

@@ -103,6 +103,22 @@ First question - if Harrison does not kick me work, how will I learn?
 
     Honestly, right now I feel like the UX work is the play.  If I can work with Harrison, I'll quickly speed past any progress I would make on my own.  If I can't, I feel like I've got a much better shot at landing a UX role than a UI5 role.  UX for the rest of the day.
 
+    -Upcoming call with HH:
+
+        -What would a good portfolio business app look like?
+            -Multiple views - tabbed or tile-based browsing.
+            -Dashboard
+            -consume OData
+            -CRUD operations?  Would this require me to make a custom OData service?
+            -use routing
+            -Element binding > master/detail view
+            -Adaptive
+            -Charting data
+
+        -Should I 'mislead' on my resume?
+
+
+
 
 
 

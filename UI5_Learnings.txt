@@ -4,10 +4,7 @@
     -   How do I get an app up and live on the Web?
     -   How do I handle logins?
     -   How exactly does scope work in UI5?
-        -   How do I do routing through UI5?
-        -   What are the rules and syntax for data-binding?
     -   What is 'destroy'?  What do I use it on, and why should I?
-        -   What is the manifest.json file and why is it so important?
     -   What is the purpose of the top-level Component.js file and how does it      relate to the index.html file?
     -   How exactly do I go about using modules?
     -   How do I attach a common controller to a fragment?
@@ -20,8 +17,13 @@
 
 /////////  Solved Conceptual Open Questions   ////////////
 
+    -   What is the manifest.json file and why is it so important?
+    -   How do I do routing through UI5?
+    -   What are the rules and syntax for data-binding?
 
 //////////////  Specific Open Questions  ///////////////
+
+    -HH is not using ES6 conventions in Avanos (arrow functions, let + const, etc.)  Why not?
 
     -Are all views created when the script in index.js is run?  Then it just shows you whichever one you have navigated to?  
 
