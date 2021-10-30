@@ -42,10 +42,7 @@ Does all Async JS use the message queue?  Is that the definition?
 
 -- Promises:  A promise is an object that determines if an event has happened or not, and what to do if the event has happened.  Before the event has happened the promise is pending.  After it has happened, it is resolved.  
 
--- Hoisting:  Hoisting occurs in every execution context (spell on the stack) 
-After an execution context is stacked but before it is executed, JS runs through
-it and makes a couple things available immediately.  Declared functions (but not
-function expressions) are available at ANY point in the execution of the context.  
+-- Hoisting:  Hoisting occurs in every execution context (i.e. spells on the stack) After an execution context is stacked but before it is executed, JS runs through it and makes a couple things available immediately.  Declared functions (but not function expressions) are available at ANY point in the execution of the context.  
 Variables are all also declared, but their values are all set to Undefined
 and they aren't re-set to the value the programmer wants until they are reached
 during exection of the current execution object. So consider:
@@ -91,15 +88,11 @@ function foo(bar){}
 function expression:
 var foo = function(bar){}
 
-difference between the two is that a function declaration is hoisted (made available
-for use before the program is executed) while a function expression is not.  So it 
-sounds like I need a pretty good reason to use a function declaration because a
-function expression prevents me from executing a function that is declared below 
-where that function is called.  It makes the code more readable.
+difference between the two is that a function declaration is hoisted (made available for use before the program is executed) while a function expression is not.  So it sounds like I need a pretty good reason to use a function declaration because a function expression prevents me from executing a function that is declared below where that function is called.  It makes the code more readable.
 
-a callback function has two distinguishing characteristics.  First,
-it MUST(?) be passed to another function as an argument.  Second,
-it is invoked by that other function, not by 
+-A callback is a function that is passed to another function as an argument.  I do not yet understand the significance of this, but it seems to have something to do with asynchronous execution.
+
+
 
 --What is an object? 
     An object is just a set of name-value pairs.  The values can be 
@@ -117,12 +110,7 @@ What is a method?
     Remember that objects are just collections of key:value pairs,
     so 
 
-What is a primitive? - A primitive is a value with no other features.  Things like strings, numbers, 
-    and booleans are primitives.  Objects are not.  It might just be anything that doesn't
-    contain an operator?  Variables containing primitives actually hold the
-    value of those primitives, while variables containing objects do not 
-    actually contain those objects.  Instead they contain a reference to the 
-    place in memory where the object is stored.
+What is a primitive? - A primitive is a value with no other features.  Things like strings, numbers, and booleans are primitives.  Objects are not.  It might just be anything that doesn't contain an operator?  Variables containing primitives actually hold the value of those primitives, while variables containing objects do not actually contain those objects.  Instead they contain a reference to the place in memory where the object is stored.
 
 
 --  Modules:  working definition:
@@ -134,9 +122,7 @@ What is a primitive? - A primitive is a value with no other features.  Things li
 
 
 module.exports =   
-     so I just now understood the form of this.  Module is an object.  Exports is a property 
-    of that object, specifically a property that makes the value it contains available to the Require method.
-    Require takes a parameter (the file path) and returns whatever value has been assigned to 
+     so I just now understood the form of this.  Module is an object.  Exports is a property of that object, specifically a property that makes the value it contains available to the Require method. Require takes a parameter (the file path) and returns whatever value has been assigned to 
     the Exports key of the Module object in the JS file it finds there.
 
 Event Listener:
@@ -207,9 +193,7 @@ All of Walk's child objects will get the property of .speed and the value of
 
 9.22.8:47pm
 
-Here's my best explanation right now.  Children don't automatically inherit ANYTHING
-from their parents.  Only members specified with the .prototype function
-are passed on. 
+Here's my best explanation right now.  Children don't automatically inherit ANYTHING from their parents.  Only members specified with the .prototype function are passed on. 
 
 12.22 6:03pm
 
